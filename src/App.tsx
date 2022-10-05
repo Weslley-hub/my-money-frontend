@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { AuthRoutes } from "./pages/Routes/Auth.routes";
 
-import { theme } from "./global/styles/style"
+import { theme } from "./global/styles/theme"
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import { Box, Flex, Grid, GridItem, Image } from "@chakra-ui/react";
 
-import logoImg from "../../assets/image/Vertical.svg";
-import { LoginForm } from "./components/LoginForm";
+import logoImg from "../../assets/images/logo-vertical.svg";
+import { LoginForm } from "./Components/LoginForm";
 
 export function Login() {
     return (
