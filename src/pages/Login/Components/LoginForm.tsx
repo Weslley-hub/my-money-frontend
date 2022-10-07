@@ -1,8 +1,8 @@
 import { FormControl, Text, VStack, Link } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { Button } from "../../../Components/Button";
-import { FormInput } from "../../../Components/Input";
+import { Button } from "../../../components/Button";
+import { FormInput } from "../../../components/Input";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -14,17 +14,19 @@ export function LoginForm() {
       password,
     });
   }
-  
+
   return (
-    <VStack 
-      alignItems={"flex-start"} w={"60%"} maxWidth="40rem">
+    <VStack alignItems={"flex-start"} w={"60%"} maxWidth="40rem">
       <Text
-        fontFamily={"Inter"} 
-        fontWeight="bold" 
-        fontSize="2.2rem" 
-        color="formTitle.900" 
+        fontFamily={"Inter"}
+        fontWeight="bold"
+        fontSize="2.2rem"
+        color="formTitle.900"
         mb={"2rem"}
-      > Login </Text>
+      >
+        {" "}
+        Login{" "}
+      </Text>
       <FormControl>
         <FormInput
           type="email"
@@ -43,29 +45,28 @@ export function LoginForm() {
           value={password}
         />
         <VStack mt={"1rem"} alignContent={""} color={"inputLabel.900"}>
-        <Link href="" isExternal>
-          <Text>Recuperar senha</Text>
-        </Link>
-        </VStack>
-        
-        <VStack alignItems={"center"}>
-        <Button
-          onClick={onSubmit}
-          label="Entrar"
-          width={"50%"}
-          background="primary.900"
-          _active={{ opacity: 0.1 }}
-          _hover={{ background: "primary.900" }}
-          mt={"2rem"}
-        />
-        </VStack>
-      
-      <VStack mt={"1rem"} alignItems={"center"}  color={"inputLabel.900"}>
-        <Link href="" isExternal>
-          <Text>Criar conta</Text>
-        </Link>
+          <Link href="" isExternal>
+            <Text>Recuperar senha</Text>
+          </Link>
         </VStack>
 
+        <VStack alignItems={"center"}>
+          <Button
+            onClick={onSubmit}
+            label="Entrar"
+            width={"50%"}
+            background="primary.900"
+            _active={{ opacity: 0.1 }}
+            _hover={{ background: "primary.900" }}
+            mt={"2rem"}
+          />
+        </VStack>
+
+        <VStack mt={"1rem"} alignItems={"center"} color={"inputLabel.900"}>
+          <Link href="" isExternal>
+            <Text>Criar conta</Text>
+          </Link>
+        </VStack>
       </FormControl>
     </VStack>
   );
