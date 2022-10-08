@@ -14,27 +14,31 @@ const theme = extendTheme({
     inputBackground: {
       900: "#E2E2E2",
     },
-    light : {
+    light: {
       900: "#FFFFFF",
     },
     inputLabel: {
-        900: "#7A7A7A",
+      900: "#7A7A7A",
     },
     iputIcon: {
-        900: "#808080",
+      900: "#808080",
     },
     primaryLight: {
-        900: "#00B171",
+      900: "#00B171",
     },
     accentColor: {
-        900: "#F0F0F0",
+      900: "#F0F0F0",
     },
     alert: {
-        900: "#D70000",
+      900: "#D70000",
     },
     accentText: {
-        900: "#5F5F5F",
+      900: "#5F5F5F",
     },
+  },
+  fonts: {
+    heading: `'Poppins', sans-serif`,
+    body: `'Inter', sans-serif`,
   },
 });
 
