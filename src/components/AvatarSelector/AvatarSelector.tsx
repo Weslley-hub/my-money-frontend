@@ -1,20 +1,23 @@
-import { Box, Text, Image } from "@chakra-ui/react";
-import { useCallback, useState } from "react";
+import { Box, Text, Image, SpaceProps } from "@chakra-ui/react";
 
+import { Avatar } from "./utils/defaultAvatarOptions";
 import { AvatarOptionsList } from "./components";
-import { Avatar, defaultAvatarOptions } from "./utils/defaultAvatarOptions";
 
-const initialAvatar = defaultAvatarOptions[0];
+type AvatarSelectorProps = SpaceProps & {
+  selectedAvatar: Avatar;
+  onChangeSelectedAvatar: (avatar: Avatar) => void;
+};
 
-const AvatarSelector = () => {
-  const [selectedAvatar, setSelectedAvatar] = useState<Avatar>(initialAvatar);
-
-  const onChangeSelectedAvatar = useCallback((avatar: Avatar) => {
-    setSelectedAvatar(avatar);
-  }, []);
+const AvatarSelector = (props: AvatarSelectorProps) => {
+  const { onChangeSelectedAvatar, selectedAvatar, ...rest } = props;
 
   return (
-    <Box display={"flex"} flexDirection={"column"} alignItems="center">
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems="center"
+      {...rest}
+    >
       <Text
         fontFamily={"Inter"}
         fontSize="1.2rem"

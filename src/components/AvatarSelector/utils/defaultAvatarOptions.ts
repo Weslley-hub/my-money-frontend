@@ -37,3 +37,5 @@ export const defaultAvatarOptions: Avatar[] = [
     id: "MAN_AVATAR_3",
   },
 ];
+
+export const initialAvatar = defaultAvatarOptions[0];

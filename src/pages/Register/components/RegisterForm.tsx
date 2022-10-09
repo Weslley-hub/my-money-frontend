@@ -1,18 +1,34 @@
-import { Box } from "@chakra-ui/react";
+import { useState, useCallback } from "react";
+import { Box, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
-import { AvatarSelector } from "../../../components/AvatarSelector";
-import { FormInput } from "../../../components/FormInput";
-import { Button } from "../../../components/Button";
-import { AuthFormLayout } from "../../../components/AuthFormLayout";
-import { PasswordInput } from "../../../components/PasswordInput";
+import { Form, Formik } from "formik";
 
 import { userIcon, emailIcon } from "../../../assets/images/icons/textfieds";
-import { useState } from "react";
+
+import {
+  initialAvatar,
+  AuthFormLayout,
+  AvatarSelector,
+  FormInput,
+  PasswordInput,
+  Avatar,
+  Button,
+} from "../../../components";
+
+import { UserValidationSchema } from "../validation/UserSchema";
+import { RegisterFormData } from "../types/RegisterForm";
+
+import { initialRegisterFormData } from "../utils/defaultRegisterFormData";
 
 const RegisterForm = () => {
+  const toast = useToast();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [selectedAvatar, setSelectedAvatar] = useState<Avatar>(initialAvatar);
+
+  const onChangeSelectedAvatar = useCallback((avatar: Avatar) => {
+    setSelectedAvatar(avatar);
+  }, []);
 
   function navigateToLoginPage() {
     navigate({
@@ -20,8 +36,17 @@ const RegisterForm = () => {
     });
   }
 
-  function handleSubmit() {
-    setIsLoading(true);
+  function showSucessToast(message: string) {
+    toast({
+      title: message,
+      status: "success",
+      isClosable: true,
+    });
+  }
+
+  function createUserAccount(data: RegisterFormData) {
+    console.log("UserData: ", data);
+    console.log("SelectedAvatar:", selectedAvatar);
   }
 
   return (
@@ -30,7 +55,10 @@ const RegisterForm = () => {
       hasGoBackButton
       onClickGoBackButton={navigateToLoginPage}
     >
-      <AvatarSelector />
+      <AvatarSelector
+        onChangeSelectedAvatar={onChangeSelectedAvatar}
+        selectedAvatar={selectedAvatar}
+      />
 
       <Box
         display={"flex"}
@@ -39,36 +67,67 @@ const RegisterForm = () => {
         alignItems={"center"}
         mt={"3rem"}
       >
-        <FormInput
-          placeholder="Nome Completo"
-          width={"80%"}
-          iconSource={userIcon}
-          mb="1.4rem"
-        />
+        <Formik<RegisterFormData>
+          initialValues={initialRegisterFormData}
+          validationSchema={UserValidationSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              createUserAccount(values);
+              showSucessToast("Usuário cadastrado com sucesso");
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <FormInput
+                placeholder="Nome Completo"
+                width={"80%"}
+                iconSource={userIcon}
+                mb="1.4rem"
+                type="text"
+                name="name"
+                textTransform={"capitalize"}
+                formikFieldConfig={{ name: "name" }}
+              />
 
-        <FormInput
-          type="email"
-          placeholder="E-mail"
-          width={"80%"}
-          iconSource={emailIcon}
-          mb="1.4rem"
-        />
+              <FormInput
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                width={"80%"}
+                iconSource={emailIcon}
+                mb="1.4rem"
+                formikFieldConfig={{ name: "email" }}
+              />
 
-        <PasswordInput
-          mb="1.4rem"
-          placeholder="Senha"
-          width={"80%"}
-          hasClickableIcon
-        />
+              <PasswordInput
+                mb="1.4rem"
+                placeholder="Senha"
+                name="password"
+                width={"80%"}
+                hasClickableIcon
+                formikFieldConfig={{ name: "password" }}
+              />
 
-        <Button
-          py={"1.2rem"}
-          isLoading={isLoading}
-          label="Criar Conta"
-          width={"80%"}
-          mt="2rem"
-          onClick={handleSubmit}
-        />
+              <Button
+                py={"1.2rem"}
+                isLoading={isSubmitting}
+                label="Criar Conta"
+                width={"80%"}
+                mt="2rem"
+                type="submit"
+              />
+            </Form>
+          )}
+        </Formik>
       </Box>
     </AuthFormLayout>
   );
