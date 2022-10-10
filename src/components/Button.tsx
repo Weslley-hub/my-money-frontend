@@ -7,16 +7,18 @@ type ButtonProps = ChackraUiButtonProps & {
   label: string;
 };
 
-export function Button({ label, ...rest }: ButtonProps) {
+export function Button({ label, isLoading, ...rest }: ButtonProps) {
   return (
     <ChackraUiButton
       height={"3rem"}
       paddingY={"1.8rem"}
-      fontFamily={"Inter"}
-      fontWeight="bold"
+      fontFamily={"Poppins"}
+      fontWeight="SemiBold"
       fontSize={"1rem"}
       colorScheme="teal"
       borderRadius={"6px"}
+      backgroundColor="primary.900"
+      isLoading={isLoading}
       {...rest}
     >
       {label}

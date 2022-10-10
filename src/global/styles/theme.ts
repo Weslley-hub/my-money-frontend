@@ -8,6 +8,9 @@ const theme = extendTheme({
     secondary: {
       900: "#009AF1",
     },
+    tertiary: {
+      900: "#EDEDED",
+    },
     formTitle: {
       900: "#626262",
     },

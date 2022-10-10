@@ -2,7 +2,7 @@ import { FormControl, Text, VStack, Link } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { Button } from "../../../components/Button";
-import { FormInput } from "../../../components/Input";
+import { FormInput } from "../../../components/FormInput";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -18,8 +18,8 @@ export function LoginForm() {
   return (
     <VStack alignItems={"flex-start"} w={"60%"} maxWidth="40rem">
       <Text
-        fontFamily={"Inter"}
-        fontWeight="bold"
+        fontFamily={"Poppins"}
+        fontWeight="Semi Bold"
         fontSize="2.2rem"
         color="formTitle.900"
         mb={"2rem"}
@@ -44,7 +44,11 @@ export function LoginForm() {
           onChange={(text) => setPassword(text.target.value)}
           value={password}
         />
-        <VStack mt={"1rem"} alignContent={""} color={"inputLabel.900"}>
+        <VStack mt={"1rem"} 
+                alignItems={"center"} 
+                color={"inputLabel.900"} 
+                fontFamily={"Poppins"}
+                fontWeight="Bold">
           <Link href="" isExternal>
             <Text>Recuperar senha</Text>
           </Link>
@@ -62,7 +66,11 @@ export function LoginForm() {
           />
         </VStack>
 
-        <VStack mt={"1rem"} alignItems={"center"} color={"inputLabel.900"}>
+        <VStack mt={"1rem"} 
+                alignItems={"center"} 
+                color={"inputLabel.900"} 
+                fontFamily={"Poppins"}
+                fontWeight="Bold">
           <Link href="" isExternal>
             <Text>Criar conta</Text>
           </Link>
