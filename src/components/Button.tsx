@@ -11,8 +11,9 @@ export function Button({ label, isLoading, ...rest }: ButtonProps) {
   return (
     <ChackraUiButton
       height={"3rem"}
-      fontFamily={"Inter"}
-      fontWeight="bold"
+      paddingY={"1.8rem"}
+      fontFamily={"Poppins"}
+      fontWeight="SemiBold"
       fontSize={"1rem"}
       colorScheme="teal"
       borderRadius={"6px"}
