@@ -2,7 +2,7 @@ import { FormControl, Text, VStack, Link } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { Button } from "../../../components/Button";
-import { FormInput } from "../../../components/Input";
+import { FormInput } from "../../../components/FormInput";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
