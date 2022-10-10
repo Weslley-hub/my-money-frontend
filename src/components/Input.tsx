@@ -12,7 +12,7 @@ export function FormInput({ label, ...rest }: FormInputProps) {
           color={"label.900"}
           fontFamily="Inter"
           fontSize={"1.2rem"}
-          fontWeight={"normal"}
+          fontWeight={"Regular"}
           mb={0}
         >
           {label}
