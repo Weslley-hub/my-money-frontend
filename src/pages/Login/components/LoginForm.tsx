@@ -19,10 +19,10 @@ export function LoginForm() {
     <VStack alignItems={"flex-start"} w={"60%"} maxWidth="40rem">
       <Text
         fontFamily={"Inter"}
-        fontWeight="bold"
+        fontWeight="Bold"
         fontSize="2.2rem"
         color="formTitle.900"
-        mb={"2rem"}
+        mb={"1rem"}
       >
         {" "}
         Login{" "}

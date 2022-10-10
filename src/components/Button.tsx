@@ -13,7 +13,7 @@ export function Button({ label, ...rest }: ButtonProps) {
       height={"3rem"}
       paddingY={"1.8rem"}
       fontFamily={"Inter"}
-      fontWeight="bold"
+      fontWeight="Bold"
       fontSize={"1rem"}
       colorScheme="teal"
       borderRadius={"6px"}
