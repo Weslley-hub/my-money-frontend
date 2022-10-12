@@ -18,8 +18,17 @@ export type FormInputProps = InputProps & {
 
 export function FormInput(props: FormInputProps) {
   const [field, meta, helpers] = useField(props.formikFieldConfig);
-  const { width, iconSource, hasClickableIcon, onClickIcon, mb, ...rest } =
-    props;
+
+  const {
+    width,
+    iconSource,
+    hasClickableIcon,
+    onClickIcon,
+    mb,
+    formikFieldConfig,
+    ...rest
+  } = props;
+
   return (
     <FormControl mb={mb} width={width} display={"flex"} flexDirection="column">
       <InputGroup>
