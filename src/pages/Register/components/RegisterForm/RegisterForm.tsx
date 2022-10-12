@@ -3,7 +3,8 @@ import { Box, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 
-import { userIcon, emailIcon } from "../../../assets/images/icons/textfieds";
+import { userIcon, emailIcon } from "../../../../assets/images/icons/textfieds";
+import "./RegisterForm.styles.css";
 
 import {
   initialAvatar,
@@ -13,12 +14,12 @@ import {
   PasswordInput,
   Avatar,
   Button,
-} from "../../../components";
+} from "../../../../components";
 
-import { UserValidationSchema } from "../validation/UserSchema";
-import { RegisterFormData } from "../types/RegisterForm";
+import { UserValidationSchema } from "../../validation/UserSchema";
+import { RegisterFormData } from "../../types/RegisterForm";
 
-import { initialRegisterFormData } from "../utils/defaultRegisterFormData";
+import { initialRegisterFormData } from "../../utils/defaultRegisterFormData";
 
 const RegisterForm = () => {
   const toast = useToast();
@@ -79,14 +80,7 @@ const RegisterForm = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+            <Form id="userRegisterForm">
               <FormInput
                 placeholder="Nome Completo"
                 width={"80%"}
