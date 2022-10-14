@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { Box, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 
 import { userIcon, emailIcon } from "../../../../assets/images/icons/textfieds";
 import "./RegisterForm.styles.css";
@@ -20,6 +20,7 @@ import { UserValidationSchema } from "../../validation/UserSchema";
 import { RegisterFormData } from "../../types/RegisterForm";
 
 import { initialRegisterFormData } from "../../utils/defaultRegisterFormData";
+import { showSucessToast } from "../../../../services/ToastService";
 
 const RegisterForm = () => {
   const toast = useToast();
@@ -37,17 +38,16 @@ const RegisterForm = () => {
     });
   }
 
-  function showSucessToast(message: string) {
-    toast({
-      title: message,
-      status: "success",
-      isClosable: true,
-    });
-  }
+  function handleCreateAccount(
+    data: RegisterFormData,
+    formikHelpers: FormikHelpers<RegisterFormData>
+  ) {
+    const { setSubmitting } = formikHelpers;
 
-  function createUserAccount(data: RegisterFormData) {
-    console.log("UserData: ", data);
-    console.log("SelectedAvatar:", selectedAvatar);
+    setTimeout(() => {
+      showSucessToast(toast, "Usuário cadastrado com sucesso");
+      setSubmitting(false);
+    }, 300);
   }
 
   return (
@@ -71,13 +71,7 @@ const RegisterForm = () => {
         <Formik<RegisterFormData>
           initialValues={initialRegisterFormData}
           validationSchema={UserValidationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              createUserAccount(values);
-              showSucessToast("Usuário cadastrado com sucesso");
-              setSubmitting(false);
-            }, 400);
-          }}
+          onSubmit={handleCreateAccount}
         >
           {({ isSubmitting }) => (
             <Form id="userRegisterForm">
