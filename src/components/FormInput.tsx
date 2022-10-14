@@ -64,7 +64,7 @@ export function FormInput(props: FormInputProps) {
         />
       </InputGroup>
 
-      {meta.touched && (
+      {meta.touched && meta.error && (
         <FormHelperText color="red">{meta.error}</FormHelperText>
       )}
     </FormControl>

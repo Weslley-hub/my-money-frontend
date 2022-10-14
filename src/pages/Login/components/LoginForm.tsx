@@ -44,11 +44,13 @@ export function LoginForm() {
           onChange={(text) => setPassword(text.target.value)}
           value={password}
         />
-        <VStack mt={"1rem"} 
-                alignItems={"center"} 
-                color={"inputLabel.900"} 
-                fontFamily={"Poppins"}
-                fontWeight="Bold">
+        <VStack
+          mt={"1rem"}
+          alignItems={"center"}
+          color={"inputLabel.900"}
+          fontFamily={"Poppins"}
+          fontWeight="Bold"
+        >
           <Link href="" isExternal>
             <Text>Recuperar senha</Text>
           </Link>
@@ -66,11 +68,13 @@ export function LoginForm() {
           />
         </VStack>
 
-        <VStack mt={"1rem"} 
-                alignItems={"center"} 
-                color={"inputLabel.900"} 
-                fontFamily={"Poppins"}
-                fontWeight="Bold">
+        <VStack
+          mt={"1rem"}
+          alignItems={"center"}
+          color={"inputLabel.900"}
+          fontFamily={"Poppins"}
+          fontWeight="Bold"
+        >
           <Link href="" isExternal>
             <Text>Criar conta</Text>
           </Link>
