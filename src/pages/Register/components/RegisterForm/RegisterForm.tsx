@@ -66,7 +66,7 @@ const RegisterForm = () => {
         width={"100%"}
         flexDirection={"column"}
         alignItems={"center"}
-        mt={"3rem"}
+        mt={{ "2xl": "3rem", lg: "2rem" }}
       >
         <Formik<RegisterFormData>
           initialValues={initialRegisterFormData}

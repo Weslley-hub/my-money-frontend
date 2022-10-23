@@ -18,7 +18,7 @@ const AvatarOption = ({ data, onSelect, isSelected }: AvatarOptionProps) => {
       flexDirection={"column"}
       alignItems="center"
       justifyContent={"center"}
-      mx="0.75rem"
+      mx={{ "2xl": "0.75rem", lg: "0.5rem" }}
       cursor={"pointer"}
       opacity={isSelected ? 1 : 0.5}
       _hover={{
@@ -29,8 +29,14 @@ const AvatarOption = ({ data, onSelect, isSelected }: AvatarOptionProps) => {
       onClick={handleAvatarClick}
     >
       <Image
-        height={"2.4rem"}
-        width={"2.4rem"}
+        height={{
+          "2xl": "2.4rem",
+          lg: "1.8rem",
+        }}
+        width={{
+          "2xl": "2.4rem",
+          lg: "1.8rem",
+        }}
         src={data.imgSource}
         alt={data.alternativeDescription}
         mb="0.3rem"
