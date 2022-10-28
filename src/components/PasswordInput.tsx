@@ -1,10 +1,7 @@
 import { useState } from "react";
 
 import { FormInput, FormInputProps } from "./FormInput";
-import {
-  invisibleEyeIcon,
-  visibleEyeIcon,
-} from "../assets/images/icons/textfieds";
+import { invisibleEyeIcon, visibleEyeIcon } from "../assets/images/icons";
 
 type PasswordInputProps = Omit<FormInputProps, "iconSource">;
 
