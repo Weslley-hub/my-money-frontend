@@ -7,7 +7,7 @@ import {
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 
-import { emailIcon } from "../../../../assets/images/icons/textfieds";
+import { emailIcon } from "../../../../assets/images/icons";
 
 import { AuthFormLayout, PasswordInput } from "../../../../components";
 import { Button } from "../../../../components/Button";
