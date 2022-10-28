@@ -3,7 +3,6 @@ import { Box, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Form, Formik, FormikHelpers } from "formik";
 
-import { userIcon, emailIcon } from "../../../../assets/images/icons/textfieds";
 import "./RegisterForm.styles.css";
 
 import {
@@ -21,6 +20,8 @@ import { RegisterFormData } from "../../types/RegisterForm";
 
 import { initialRegisterFormData } from "../../utils/defaultRegisterFormData";
 import { showSucessToast } from "../../../../services/ToastService";
+
+import { emailIcon, userIcon } from "../../../../assets/images/icons";
 
 const RegisterForm = () => {
   const toast = useToast();
