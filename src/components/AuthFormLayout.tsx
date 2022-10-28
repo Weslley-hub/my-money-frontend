@@ -1,7 +1,7 @@
 import { Box, Heading, Image } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-import { longArrowLeftIcon } from "../assets/images/icons/textfieds";
+import { longArrowLeftIcon } from "../assets/images/icons";
 
 type AuthFormLayoutProps = {
   formTitle: string;
