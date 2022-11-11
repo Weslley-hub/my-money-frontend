@@ -29,7 +29,7 @@ const themePallete = {
     primaryLight: {
       900: "#00B171",
     },
-    accentColor: {
+    accent: {
       900: "#F0F0F0",
     },
     alert: {
