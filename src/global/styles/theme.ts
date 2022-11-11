@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 
-const theme = extendTheme({
+const themePallete = {
   colors: {
     primary: {
       900: "#00B172",
@@ -38,11 +38,15 @@ const theme = extendTheme({
     accentText: {
       900: "#5F5F5F",
     },
+    inactive: {
+      900: "#656262",
+    },
   },
   fonts: {
     heading: `'Poppins', sans-serif`,
     body: `'Inter', sans-serif`,
   },
-});
+};
 
-export { theme };
+const theme = extendTheme(themePallete);
+export { theme, themePallete };
