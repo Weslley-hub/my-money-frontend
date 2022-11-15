@@ -1,13 +1,14 @@
+import { ReactNode } from "react";
 import {
   Button as ChackraUiButton,
   ButtonProps as ChackraUiButtonProps,
 } from "@chakra-ui/react";
 
 type ButtonProps = ChackraUiButtonProps & {
-  label: string;
+  children: ReactNode;
 };
 
-export function Button({ label, isLoading, ...rest }: ButtonProps) {
+export function Button({ children, ...rest }: ButtonProps) {
   return (
     <ChackraUiButton
       height={{ "2xl": "3.2rem", lg: "2.8rem" }}
@@ -17,11 +18,11 @@ export function Button({ label, isLoading, ...rest }: ButtonProps) {
       fontSize={"1rem"}
       colorScheme="teal"
       borderRadius={"6px"}
-      backgroundColor="primary.900"
-      isLoading={isLoading}
+      alignItems={"center"}
+      justifyContent={"center"}
       {...rest}
     >
-      {label}
+      {children}
     </ChackraUiButton>
   );
 }

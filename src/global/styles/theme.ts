@@ -41,6 +41,17 @@ const themePallete = {
     inactive: {
       900: "#656262",
     },
+    pending: {
+      900: "#FF6B00",
+      700: "#ff6b00b3",
+    },
+    strongText: {
+      900: "#525252",
+      500: "#7E7E7E",
+    },
+    weekText: {
+      900: "#A6A3A3",
+    },
   },
   fonts: {
     heading: `'Poppins', sans-serif`,
