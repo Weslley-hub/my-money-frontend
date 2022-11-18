@@ -1,7 +1,7 @@
 import { Box, Heading, Image } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-import { longArrowLeftIcon } from "../assets/images/icons/textfieds";
+import { longArrowLeftIcon } from "../assets/images/icons";
 
 type AuthFormLayoutProps = {
   formTitle: string;
@@ -18,7 +18,10 @@ const AuthFormLayout = ({
 }: AuthFormLayoutProps) => {
   return (
     <Box
-      width={"100%"}
+      width={{
+        "2xl": "80%",
+        lg: "100%",
+      }}
       height={"100%"}
       display="flex"
       flexDirection="column"
@@ -34,9 +37,12 @@ const AuthFormLayout = ({
         {hasGoBackButton && (
           <Image
             src={longArrowLeftIcon}
-            height="1.4rem"
+            height="1.2rem"
             cursor={"pointer"}
-            mb="3rem"
+            mb={{
+              "2xl": "3rem",
+              lg: "1.4rem",
+            }}
             alignSelf={"flex-start"}
             ml="10%"
             onClick={onClickGoBackButton}
@@ -44,10 +50,16 @@ const AuthFormLayout = ({
         )}
 
         <Heading
-          fontSize="2.25rem"
+          fontSize={{
+            "2xl": "2.25rem",
+            lg: "1.4rem",
+          }}
           color={"formTitle.900"}
           fontWeight={"semibold"}
-          mb="3rem"
+          mb={{
+            "2xl": "3rem",
+            lg: "2.2rem",
+          }}
           textAlign={"left"}
           width={"80%"}
         >

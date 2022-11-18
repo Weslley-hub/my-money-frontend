@@ -1,16 +1,14 @@
 import { useToast } from "@chakra-ui/react";
 import { Form, Formik, FormikHelpers } from "formik";
 
-import { AuthFormLayout, Button, FormInput } from "../../../../components";
-
 import { NewPasswordEmailFormData } from "../types/NewPasswordEmailForm";
-
 import { initialNewPasswordEmailFormData } from "../utils/defaultNewPasswordEmailFormData";
-
 import { showSucessToast } from "../../../../services/ToastService";
 import { NewPasswordEmailValidationSchema } from "./validation/NewPasswordEmailValidationSchema";
-import { emailIcon } from "../../../../assets/images/icons/textfieds";
 
+import { emailIcon } from "../../../../assets/images/icons";
+
+import { AuthFormLayout, Button, FormInput } from "../../../../components";
 
 const NewPasswordEmailForm = () => {
   const toast = useToast();
@@ -43,14 +41,14 @@ const NewPasswordEmailForm = () => {
         {({ isSubmitting }) => (
           <Form className="forget-password-step-form">
             <FormInput
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                width={"80%"}
-                iconSource={emailIcon}
-                mb="1.4rem"
-                formikFieldConfig={{ name: "email" }}
-              />
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              width={"80%"}
+              iconSource={emailIcon}
+              mb="1.4rem"
+              formikFieldConfig={{ name: "email" }}
+            />
 
             <Button
               py={"1.2rem"}

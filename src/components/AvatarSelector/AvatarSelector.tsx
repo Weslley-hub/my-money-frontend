@@ -30,7 +30,10 @@ const AvatarSelector = (props: AvatarSelectorProps) => {
 
       <Image
         src={selectedAvatar.imgSource}
-        height="7.7rem"
+        height={{
+          "2xl": "7.7rem",
+          lg: "5rem",
+        }}
         alt={selectedAvatar.alternativeDescription}
       />
       <AvatarOptionsList

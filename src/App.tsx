@@ -7,15 +7,14 @@ import "@fontsource/poppins/600.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 
-import { AuthRoutes } from "./pages/Routes/Auth.routes";
-
 import { theme } from "./global/styles/theme";
+import { AppRoutes } from "./pages/Routes/App.routes";
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <AuthRoutes />
+        <AppRoutes />
       </BrowserRouter>
     </ChakraProvider>
   );

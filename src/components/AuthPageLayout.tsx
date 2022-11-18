@@ -13,7 +13,12 @@ const AuthPageLayout = ({ children }: AuthPageLayoutProps) => {
           <LogoSection />
         </GridItem>
         <GridItem w="100%" h="100vh" bg="tertiary.900">
-          <Flex h="100vh" w="100%">
+          <Flex
+            h="100vh"
+            w="100%"
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             {children}
           </Flex>
         </GridItem>

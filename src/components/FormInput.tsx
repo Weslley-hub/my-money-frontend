@@ -36,10 +36,10 @@ export function FormInput(props: FormInputProps) {
           {...rest}
           fontFamily={"Inter"}
           fontWeight="regular"
-          height={"3.2rem"}
+          height={{ "2xl": "3.2rem", lg: "2.8rem" }}
           color="inputLabel.700"
           background={"inputBackground.900"}
-          fontSize={"1rem"}
+          fontSize={{ "2xl": "1rem", lg: "0.9rem" }}
           _placeholder={{
             color: "#7A7A7A",
           }}
@@ -53,11 +53,12 @@ export function FormInput(props: FormInputProps) {
           alignItems={"center"}
           height={"100%"}
           cursor={hasClickableIcon ? "pointer" : "normal"}
+          fontSize={{ "2xl": "1rem", lg: "0.9rem" }}
           children={
             <Image
               src={iconSource}
-              height={"1rem"}
-              width={"1rem"}
+              height={{ "2xl": "1rem", lg: "0.9rem" }}
+              width={{ "2xl": "1rem", lg: "0.9rem" }}
               onClick={onClickIcon}
             />
           }
@@ -65,7 +66,12 @@ export function FormInput(props: FormInputProps) {
       </InputGroup>
 
       {meta.touched && meta.error && (
-        <FormHelperText color="red">{meta.error}</FormHelperText>
+        <FormHelperText
+          color="red"
+          fontSize={{ "2xl": "0.9rem", lg: "0.8rem" }}
+        >
+          {meta.error}
+        </FormHelperText>
       )}
     </FormControl>
   );
