@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Login } from "../Login";
-import { Register } from "../Register";
-import { ForgetPassword } from "../ForgetPassword";
-import { ForgetPasswordEmail } from "../ForgetPasswordEmail";
-import { Home } from "../Home";
-import { Categories } from "../Categories";
+import { Login } from "../pages/Login";
+import { Register } from "../pages/Register";
+import { ForgetPassword } from "../pages/ForgetPassword";
+import { ForgetPasswordEmail } from "../pages/ForgetPasswordEmail";
+import { Home } from "../pages/Home";
+import { Categories } from "../pages/Categories";
 
 export function AuthRoutes() {
   return (
