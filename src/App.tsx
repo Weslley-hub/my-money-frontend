@@ -9,12 +9,13 @@ import { BrowserRouter } from "react-router-dom";
 
 import { theme } from "./global/styles/theme";
 import { AppRoutes } from "./pages/Routes/App.routes";
+import { AuthRoutes } from "./pages/Routes/Auth.routes";
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <AppRoutes />
+        <AuthRoutes />
       </BrowserRouter>
     </ChakraProvider>
   );
