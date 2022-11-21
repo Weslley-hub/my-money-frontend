@@ -2,9 +2,25 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { AiFillInfoCircle } from "react-icons/ai";
 
 import { themePallete } from "../../../../../global/styles/theme";
+import { ExpenseModel } from "../../../../../models";
+import { useExpenses } from "../../../contexts/Expenses.context";
 import { UpdateDeleteButtonGroup } from "../../UpdateDeleteButtonGroup";
 
-const Expense = () => {
+type ExpenseCardProps = {
+  data: ExpenseModel;
+};
+
+const ExpenseCard = ({ data: expense }: ExpenseCardProps) => {
+  const { removeExpense, openExpenseModal } = useExpenses();
+
+  function handleRemoveExpense() {
+    removeExpense(expense.id);
+  }
+
+  function handleUpdateExpense() {
+    openExpenseModal(expense);
+  }
+
   return (
     <Flex
       height={"9rem"}
@@ -50,12 +66,12 @@ const Expense = () => {
               fontSize={"3rem"}
               mb={"0.2rem"}
             >
-              🚘
+              {expense.icon}
             </Text>
 
             <Box marginLeft={"0.6rem"}>
               <Heading color={"strongText.900"} fontSize={"1.5rem"}>
-                Troca de Óleo
+                {expense.description}
               </Heading>
 
               <Text
@@ -77,7 +93,10 @@ const Expense = () => {
             justifyContent={"center"}
             alignItems={"flex-end"}
           >
-            <UpdateDeleteButtonGroup />
+            <UpdateDeleteButtonGroup
+              onClickDeleteExpenseButton={handleRemoveExpense}
+              onClickUpdateExpenseButton={handleUpdateExpense}
+            />
 
             <Flex
               alignItems={"flex-end"}
@@ -91,7 +110,7 @@ const Expense = () => {
                 fontSize="1.5rem"
                 marginBottom={0}
               >
-                R$ 500,00
+                R$ {expense.totalAmount}
               </Text>
               <Text
                 marginLeft={"0.2rem"}
@@ -111,4 +130,4 @@ const Expense = () => {
   );
 };
 
-export { Expense };
+export { ExpenseCard };
