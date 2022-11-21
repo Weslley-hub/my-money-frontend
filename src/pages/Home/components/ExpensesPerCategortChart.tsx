@@ -4,7 +4,7 @@ import {
   ArcElement,
   Tooltip,
   Legend,
-  ChartData,
+  ChartData
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { themePallete } from "../../../global/styles/theme";
@@ -19,20 +19,20 @@ type ExpenseCategory = {
 const expenseCategories: ExpenseCategory[] = [
   {
     name: "Automóvel",
-    color: themePallete.colors.pending[900],
+    color: themePallete.colors.pending[900]
   },
   {
     name: "Alguel",
-    color: themePallete.colors.alert[900],
+    color: themePallete.colors.alert[900]
   },
   {
     name: "Alimentação",
-    color: themePallete.colors.primary[900],
+    color: themePallete.colors.primary[900]
   },
   {
     name: "Lazer",
-    color: themePallete.colors.secondary[900],
-  },
+    color: themePallete.colors.secondary[900]
+  }
 ];
 
 const expenseCategoryColors = expenseCategories.map(
@@ -45,9 +45,9 @@ const chartData: ChartData<"pie", Number[]> = {
       label: "# of Votes",
       data: [12, 19, 3, 5],
       backgroundColor: expenseCategoryColors,
-      borderWidth: 0,
-    },
-  ],
+      borderWidth: 0
+    }
+  ]
 };
 
 const ExpensesPerCategortChart = () => {
@@ -67,7 +67,7 @@ const ExpensesPerCategortChart = () => {
       >
         Gráfico de Gastos
       </Heading>
-      <Box width="28rem" height="28rem">
+      <Box width="16rem" height="16rem">
         <Pie data={chartData} />
       </Box>
       <Flex
@@ -87,6 +87,7 @@ const ExpensesPerCategortChart = () => {
                 alignItems={"center"}
                 paddingLeft={"2rem"}
                 marginY={"0.5rem"}
+                key={expenseCategory.name}
               >
                 <Box
                   height={"1rem"}

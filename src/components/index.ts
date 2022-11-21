@@ -5,4 +5,7 @@ export * from "./Button";
 export * from "./FormInput";
 export * from "./LogoSection";
 export * from "./PasswordInput";
-
+export * from "./Modal";
+export * from "./FormSelect";
+export * from "./FormInputWithLabel";
+export * from "./FormSelect";

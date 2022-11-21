@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import {
   Button as ChackraUiButton,
-  ButtonProps as ChackraUiButtonProps,
+  ButtonProps as ChackraUiButtonProps
 } from "@chakra-ui/react";
 
 type ButtonProps = ChackraUiButtonProps & {
@@ -11,15 +11,17 @@ type ButtonProps = ChackraUiButtonProps & {
 export function Button({ children, ...rest }: ButtonProps) {
   return (
     <ChackraUiButton
-      height={{ "2xl": "3.2rem", lg: "2.8rem" }}
-      paddingY={"1.8rem"}
       fontFamily={"Poppins"}
       fontWeight="SemiBold"
-      fontSize={"1rem"}
+      fontSize={"0.9rem"}
       colorScheme="teal"
       borderRadius={"6px"}
+      height={0}
       alignItems={"center"}
       justifyContent={"center"}
+      _hover={{
+        opacity: 0.7
+      }}
       {...rest}
     >
       {children}
