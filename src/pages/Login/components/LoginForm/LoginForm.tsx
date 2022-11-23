@@ -65,16 +65,14 @@ export function LoginForm() {
                 formikFieldConfig={{ name: "email" }}
                 iconSource={emailIcon}
                 name="email"
-                width={"80%"}
-              />
+                width={"80%"} />
 
               <PasswordInput
                 name="password"
                 type="password"
                 placeholder="Senha"
                 formikFieldConfig={{ name: "password" }}
-                width={"80%"}
-              />
+                width={"80%"} />
 
               <Box
                 mt={"1rem"}
@@ -107,8 +105,7 @@ export function LoginForm() {
                 _hover={{ background: "primary.900" }}
                 mt={"2rem"}
                 type="submit"
-                isLoading={isSubmitting}
-              />
+                isLoading={isSubmitting} />
 
               <Box
                 mt={"1rem"}
