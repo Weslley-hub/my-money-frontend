@@ -5,8 +5,7 @@ import { Login } from "../Login";
 import { Register } from "../Register";
 import { ForgetPassword } from "../ForgetPassword";
 import { ForgetPasswordEmail } from "../ForgetPasswordEmail";
-import { Home } from "../Home";
-import { Categories } from "../Categories";
+import { ProfileSettings } from "../ProfileSettings";
 
 
 export function AuthRoutes() {
@@ -17,7 +16,7 @@ export function AuthRoutes() {
       <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/forget-password" element={<ForgetPassword />} />
       <Route path="/auth/forget-password-email" element={<ForgetPasswordEmail />} />
-      <Route path="/auth/categories" element={<Categories />} />
+      <Route path="/auth/profile-settings" element={<ProfileSettings />} />
     </Routes>
   );
 }
