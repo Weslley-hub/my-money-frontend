@@ -1,2 +1,1 @@
-export * from "./ExpensesMonthSelector";
-export * from "./Expense";
+export * from "./CategorieCard";
