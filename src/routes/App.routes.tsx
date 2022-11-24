@@ -10,7 +10,6 @@ import { Register } from "../pages/Register";
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/categories" element={<Categories />} />
       <Route path="/" element={<Home />} />
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
