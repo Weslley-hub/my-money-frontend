@@ -1,31 +1,42 @@
 import { Box, Text } from "@chakra-ui/react";
-import { Expense, ExpensesMonthSelector } from "./components";
+
+import { useExpenses } from "../../contexts/Expenses.context";
+import { ExpenseCard, ExpensesMonthSelector } from "./components";
 
 type MonthlyExpensesProps = {
   width: string;
 };
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export type ExpenseModel = {
+  description: string;
+  icon: string;
+  id: string;
+};
 
 const MonthlyExpenses = ({ width }: MonthlyExpensesProps) => {
+  const { expenses } = useExpenses();
+
   return (
-    <Box width={width}>
-      <ExpensesMonthSelector />
+    <>
+      <Box width={width}>
+        <ExpensesMonthSelector />
 
-      <Box
-        maxHeight={"60vh"}
-        overflowY={"scroll"}
-        marginTop={"2rem"}
-      >
-        {arr.map((value) => (
-          <Expense key={value} />
-        ))}
+        <Box
+          height={"50vh"}
+          maxHeight={"50vh"}
+          overflowY={"scroll"}
+          marginTop={"2rem"}
+        >
+          {expenses.map((expense) => (
+            <ExpenseCard key={expense.id} data={expense} />
+          ))}
+        </Box>
+
+        <Text marginTop={"2rem"} textAlign={"center"} color={"accentText.900"}>
+          Role a lista para ver mais items
+        </Text>
       </Box>
-
-      <Text marginTop={"2rem"} textAlign={"center"} color={"accentText.900"}>
-        Role a lista para ver mais items
-      </Text>
-    </Box>
+    </>
   );
 };
 

@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-import { FormInput, FormInputProps } from "./FormInput";
+import { FormInput, CommonFormInputProps } from "./FormInput";
 import { invisibleEyeIcon, visibleEyeIcon } from "../assets/images/icons";
 
-type PasswordInputProps = Omit<FormInputProps, "iconSource">;
-
-const PasswordInput = (props: PasswordInputProps) => {
+const PasswordInput = (props: CommonFormInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   function togglePasswordVisibility() {
@@ -15,6 +13,7 @@ const PasswordInput = (props: PasswordInputProps) => {
   return (
     <FormInput
       {...props}
+      variant="WITH_ICON"
       type={isPasswordVisible ? "text" : "password"}
       onClickIcon={togglePasswordVisibility}
       hasClickableIcon
