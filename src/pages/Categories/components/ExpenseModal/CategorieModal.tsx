@@ -1,4 +1,4 @@
-import { Flex, Spinner, Text, Button as ChakraUiButton } from "@chakra-ui/react";
+import { Flex, Spinner, Text, Button as ChakraUiButton, useToast, Icon, Box } from "@chakra-ui/react";
 import { Formik } from "formik";
 import React, { useImperativeHandle, useMemo, useRef, useState } from "react";
 import {
@@ -9,8 +9,9 @@ import {
 } from "../../../../components";
 import { useCategorie } from "../../contexts/Categorie.context";
 import { CategorieFormData } from "../../utils";
-import { ExpenseValidationSchema } from "../../validation";
+import { CategorieValidationSchema } from "../../validation";
 import { CategorieModel } from "../../../../models";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 export type CategorieModalHandles = {
   open: (data?: CategorieModel) => void;
@@ -26,10 +27,12 @@ type IconButtonProps = {
   onSelectIcon: (icon: string) => void;
   isSelected: boolean;
 }
+
+
 function IconButton(props: IconButtonProps){
 
   function handleButtonClick(){
-    console.log("IconButton", props.icon);
+   
     props.onSelectIcon(props.icon);
   }
 
@@ -94,21 +97,28 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
 
   
   function handleClickIconButton(icon: string){
-    console.log("MODAL", icon);
     setSelectedIcon(icon);
   }
-
+  const toast = useToast();
   async function handleSubmitForm(data: CategorieFormData) {
+
+    
+     if(!selectedIcon){
+     showErrorToast(toast, "Selecione um ícone")
+      return;
+     }
+
+
     if (!selectedCategorie) {
       addCategorie({
         description: data.description,
-        icon: "🎈",
+        icon: selectedIcon,
         id: " "
       });
     } else {
       updateCategorie({
         description: data.description,
-        icon: "🎈",
+        icon: selectedIcon,
         id: selectedCategorie.id
       });
     }
@@ -125,35 +135,69 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
     <Modal
       title={selectedCategorie? "Atualizar Categoria" : "Cadastrar Categoria"}
       ref={modalRef}
+      
     >
-      <Formik<CategorieFormData>
+      <Formik<CategorieFormData> 
         initialValues={formInitialValues}
         onSubmit={async (data, { setSubmitting }) => {
           setSubmitting(true);
           await handleSubmitForm(data);
           setSubmitting(false);
         }}
-        
+        validationSchema = {CategorieValidationSchema}
       >
         {({ isSubmitting, handleSubmit }) => {
           return (
             <>
-              <FormInputWithLabel
+              <Flex
+      alignItems={"center"} 
+      justifyContent ={"center"}
+      height={"6rem"} 
+      width="70%" 
+      background={"gray.300"}
+      borderRadius = {"20px"}
+      marginRight={"1rem"}
+      marginLeft = {"4rem"}>
+      
+        <Flex alignItems={"center"} 
+        justifyContent ={"center"}
+        background={"gray"} 
+        height={"4rem"}
+        width = "20%" 
+        borderRadius = {"20px"}
+        marginRight={"1rem"} >
+        <Text fontSize={"3rem"}>{selectedIcon}</Text></Flex>
+        <Box alignSelf={"flex-end"}>
+        <FormInputWithLabel
                 variant="WITHOUT_ICON"
                 formikFieldConfig={{ name: "description" }}
                 placeholder={"Nome da categoria"}
                 name="description"
                 marginBottom={"1rem"}
-                label="Descrição"
+                label=""
+               
+                
               />
+              </Box>
+        </Flex>
               
-              <Flex >
+              
+              <Flex paddingY={"40px"} marginLeft = {"7rem"}>
                 {defaultIcons.map(
                   (icon) => (
                     <IconButton isSelected={selectedIcon === icon} onSelectIcon={handleClickIconButton} key={icon} icon={icon} />)
                   )
                 }
+                <Flex 
+              alignItems={"center"} 
+              justifyContent={"center"} 
+              height={"4rem"} 
+              width={"4rem"} 
+              borderRadius ={"5px"}
+              background={"gray.300"}
+              marginRight={"1rem"}></Flex>
               </Flex>
+              
 
 
               <Flex
@@ -209,3 +253,5 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
 
 const CategorieModal = React.forwardRef(CategorieModalComponent);
 export { CategorieModal };
+ 
+

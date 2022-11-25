@@ -1,1 +1,1 @@
-export * from "./ExpenseSchema";
+export * from "./CategorieSchema";
