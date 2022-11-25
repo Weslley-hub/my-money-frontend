@@ -1,17 +1,20 @@
 
 
-import { ProfileSettingsConfig } from "./components"
+import { ProfileSettingsConfig } from "./components";
 import { SideNavigationBar } from "../../components/SideNavigationBar";
-import { Flex } from "@chakra-ui/react";
-
+import { Flex, Box } from "@chakra-ui/react";
+import { Header} from "../Home/components"
 
 const ProfileSettings = () => {
   return (
-
-    // <SideNavigationBar/>
-  
-    < ProfileSettingsConfig />
- 
+        
+    <Box height="100hv" width="100%" >
+        <Header />
+        <Flex  height="100hv" width="100%" alignItems="center">
+          <SideNavigationBar/>
+          < ProfileSettingsConfig />
+        </Flex>
+    </Box>
   );
 };
 

@@ -1,8 +1,10 @@
-import { Text,
-         Box,  
-         Button as ChackraUiButton, } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
+
+import {
+  Button,
+} from "../../src/components";
 
 
 const SideNavigationBar  = () => {
@@ -11,7 +13,6 @@ const SideNavigationBar  = () => {
   function ProfileSettings() {
            navigate({
            pathname: "/auth/profile-settings",
-
     });
   }
 
@@ -34,99 +35,64 @@ const SideNavigationBar  = () => {
   }
 
   return (
-    <Box height="100vh" width="30%" background="white">
-             <Box 
-                background="primary.900"
-                mt={"1rem"}
-                alignItems={"center"}
-                color={"inputLabel.900"}
-                fontFamily={"Poppins"}
-                fontWeight="Bold"
-                justifyContent={"center"}
-                width={"80%"}
-                display={"center"}
-              >
-                <ChackraUiButton
-                  variant="link"
-                  color={"inputLabel.900"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                  onClick={ProfileSettings}
-                >
-                  <Text>Meu Perfil</Text>
-                </ChackraUiButton>
-              </Box>
+    <Box height="100vh" width="20%" background="white">
 
-               <Box
-                background="primary.900"
-                mt={"1.5rem"}
-                alignItems={"center"}
-                color={"white"}
-                fontFamily={"Poppins"}
-                fontWeight="Bold"
-                justifyContent={"center"}
-                width={"80%"}
-                display={"flex"}
+             <Button
+              background="primary.900"
+              borderRightRadius="80px"
+              borderBottomRightRadius="80px"
+              py={"1.2rem"}
+              width={"80%"}
+              mt="2rem"
+              alignItems="center"
+              type="submit" 
+              onClick={ProfileSettings}
               >
-                <ChackraUiButton
-                  variant="link"
-                  color={"inputLabel.900"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                  onClick={MyCards}
-                >
-                  <Text>Meus Cartões</Text>
-                </ChackraUiButton>
-              </Box>
+                Meu Perfil
+              </Button>
 
-               <Box
-                background="primary.900"
-                mt={"1.5rem"}
-                alignItems={"center"}
-                color={"black"}
-                fontFamily={"Poppins"}
-                fontWeight="Bold"
-                justifyContent={"center"}
-                width={"80%"}
-                display={"flex"}
+               <Button
+               background="primary.900"
+              borderRightRadius="80px"
+              borderBottomRightRadius="80px"
+              py={"1.2rem"}
+              width={"80%"}
+              mt="2rem"
+              alignItems="center"
+              type="submit"         
+              onClick={MyCards}
               >
-                <ChackraUiButton
-                  variant="link"
-                  color={"inputLabel.900"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                  onClick={MyCategories}
-                >
-                  <Text>Minhas Categórias</Text>
-                </ChackraUiButton>
-              </Box>
+                Meus Cartões
+              </Button>
 
-               <Box
-                background="primary.900"
-                mt={"1.5rem"}
-                alignItems={"center"}
-                color={"externalInputLabel.900"}
-                fontFamily={"Poppins"}
-                fontWeight="Bold"
-                justifyContent={"center"}
-                width={"50%"}
-                display={"center"}
+               <Button
+               background="primary.900"
+              borderRightRadius="80px"
+              borderBottomRightRadius="80px"
+              py={"1.2rem"}
+              width={"80%"}
+              mt="2rem"
+              alignItems="center"
+              type="submit" 
+              onClick={MyCategories}
               >
-                <ChackraUiButton
-                  variant="link"
-                  color={"inputLabel.900"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                  onClick={MyRevenues}
-                >
-                  <Text>Minhas Receitas</Text>
-                </ChackraUiButton>
-              </Box>
-    </Box>
+                Minhas Categórias
+              </Button>
+
+               <Button
+               background="primary.900"
+              borderRightRadius="80px"
+              borderBottomRightRadius="80px"
+              py={"1.2rem"}
+              width={"80%"}
+              mt="2rem"
+              alignItems="center"
+              type="submit" 
+              onClick={MyRevenues}
+              >
+                Minhas Receitas
+              </Button>
+          </Box>
   );
 };
 
