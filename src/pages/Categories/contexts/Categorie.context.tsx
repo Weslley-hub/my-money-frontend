@@ -1,20 +1,20 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
 import { CategorieModel,  } from "../../../models";
-import { ExpenseModal, ExpenseModalHandles } from "../components";
+import { CategorieModal, CategorieModalHandles } from "../components";
 
 export type CategorieContextData = {
-  expenses: CategorieModel[];
-  addExpense: (expense: CategorieModel) => void;
-  updateExpense: (updatedExpense: CategorieModel) => void;
-  removeExpense: (expenseId: string) => void;
-  openExpenseModal(data?: CategorieModel): void;
+  categories: CategorieModel[];
+  addCategorie: (categorie: CategorieModel) => void;
+  updateCategorie: (updatedCategorie: CategorieModel) => void;
+  removeCategorie: (categorieId: string) => void;
+  openCategorieModal(data?: CategorieModel): void;
 };
 
-const ExpensesContext = createContext<CategorieContextData>(
+const CategorieContext = createContext<CategorieContextData>(
   {} as CategorieContextData
 );
 
-type ExpenseProviderProps = {
+type CategorieProviderProps = {
   children: ReactNode;
 };
 
@@ -37,55 +37,55 @@ const initialState: CategorieModel[]= [
   
   
   ];
-export const ExpensesProvider = ({ children }: ExpenseProviderProps) => {
-  const expenseModalRef = useRef<ExpenseModalHandles | null>(null);
+export const CategorieProvider = ({ children }: CategorieProviderProps) => {
+  const categorieModalRef = useRef<CategorieModalHandles | null>(null);
 
-  const [expenses, setExpenses] = useState<CategorieModel[]>(initialState);
+  const [categories, setCategories] = useState<CategorieModel[]>(initialState);
 
-  function addExpense(expense: CategorieModel) {
-    const newExpenses = [
-      ...expenses,
-      { ...expense, id: new Date().toISOString() }
+  function addCategorie(categorie: CategorieModel) {
+    const newCategories = [
+      ...categories,
+      { ...categorie, id: new Date().toISOString() }
     ];
-    setExpenses(newExpenses);
+    setCategories(newCategories);
   }
 
-  function updateExpense(updatedExpense: CategorieModel) {
-    const otherExpenses = expenses.filter(
-      (expense) => expense.id !== updatedExpense.id
+  function updateCategorie(updatedCategorie: CategorieModel) {
+    const otherCategories = categories.filter(
+      (categorie) => categorie.id !== updatedCategorie.id
     );
-    setExpenses([...otherExpenses, updatedExpense]);
+    setCategories([...otherCategories, updatedCategorie]);
   }
 
-  function removeExpense(expenseId: string) {
-    const remainingExpenses = expenses.filter(
-      (expense) => expense.id !== expenseId
+  function removeCategorie(categorieId: string) {
+    const remainingCategories = categories.filter(
+      (categorie) => categorie.id !== categorieId
     );
-    setExpenses(remainingExpenses);
+    setCategories(remainingCategories);
   }
 
-  function openExpenseModal(data?: CategorieModel) {
-    expenseModalRef.current?.open(data);
+  function openCategorieModal(data?: CategorieModel) {
+    categorieModalRef.current?.open(data);
   }
 
   return (
-    <ExpensesContext.Provider
+    <CategorieContext.Provider
       value={{
-        expenses,
-        addExpense,
-        removeExpense,
-        updateExpense,
-        openExpenseModal
+        categories,
+        addCategorie,
+        removeCategorie,
+        updateCategorie,
+        openCategorieModal
       }}
     >
       {children}
 
-      <ExpenseModal ref={expenseModalRef} />
-    </ExpensesContext.Provider>
+      <CategorieModal ref={categorieModalRef} />
+    </CategorieContext.Provider>
   );
 };
 
 export const useCategorie = (): CategorieContextData => {
-  const contextData = useContext(ExpensesContext);
+  const contextData = useContext(CategorieContext);
   return { ...contextData };
 };

@@ -6,11 +6,11 @@ import {
   CategorieList,
   RegisterActionButtons
 } from "./components";
-import { ExpensesProvider } from "./contexts/Categorie.context";
+import { CategorieProvider } from "./contexts/Categorie.context";
 
 const Categories = () => {
   return (
-    <ExpensesProvider>
+    <CategorieProvider>
       <Box width={"100%"} height={"100vh"}>
         <Header />
         <Box width={"100%"} paddingY={"1.2rem"} paddingX={"2rem"}>
@@ -40,7 +40,7 @@ const Categories = () => {
           </Flex>
         </Box>
       </Box>
-    </ExpensesProvider>
+    </CategorieProvider>
   );
 };
 

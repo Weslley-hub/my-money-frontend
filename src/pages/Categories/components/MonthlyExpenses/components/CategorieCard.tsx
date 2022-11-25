@@ -8,15 +8,15 @@ type CategorieCardProps = {
   data: CategorieModel;
 };
 
-const CategorieCard = ({ data: expense }: CategorieCardProps) => {
-  const { removeExpense, openExpenseModal } = useCategorie();
+const CategorieCard = ({ data: categorie }: CategorieCardProps) => {
+  const { removeCategorie, openCategorieModal } = useCategorie();
 
-  function handleRemoveExpense() {
-    removeExpense(expense.id);
+  function handleRemoveCategorie() {
+    removeCategorie(categorie.id);
   }
 
-  function handleUpdateExpense() {
-    openExpenseModal(expense);
+  function handleUpdateCategorie() {
+    openCategorieModal(categorie);
   }
 
   return (
@@ -27,6 +27,7 @@ const CategorieCard = ({ data: expense }: CategorieCardProps) => {
       background={"accent.900"}
       borderRadius="4px"
       alignItems={"center"}
+      
     >
       <Box
         height={"100%"}
@@ -48,12 +49,12 @@ const CategorieCard = ({ data: expense }: CategorieCardProps) => {
               fontSize={"3rem"}
               mb={"0.2rem"}
             >
-              {expense.icon}
+              {categorie.icon}
             </Text>
 
             <Box marginLeft={"0.6rem"}>
               <Heading color={"strongText.900"} fontSize={"1.5rem"}>
-                {expense.description}
+                {categorie.description}
               </Heading>
 
             
@@ -67,8 +68,8 @@ const CategorieCard = ({ data: expense }: CategorieCardProps) => {
             alignItems={"flex-end"}
           >
             <UpdateDeleteButtonGroup
-              onClickDeleteExpenseButton={handleRemoveExpense}
-              onClickUpdateExpenseButton={handleUpdateExpense}
+              onClickDeleteExpenseButton={handleRemoveCategorie}
+              onClickUpdateExpenseButton={handleUpdateCategorie}
             />
 
             <Flex

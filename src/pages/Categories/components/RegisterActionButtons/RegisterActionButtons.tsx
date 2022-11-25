@@ -7,10 +7,10 @@ import { useCategorie } from "../../contexts/Categorie.context";
 type RegisterActionButtonsProps = {};
 
 const RegisterActionButtons = ({}: RegisterActionButtonsProps) => {
-  const { openExpenseModal } = useCategorie();
+  const { openCategorieModal } = useCategorie();
 
   function openRegisterExpenseModal() {
-    openExpenseModal();
+    openCategorieModal();
   }
 
   
