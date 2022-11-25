@@ -78,6 +78,7 @@ const ProfileSettingsConfig = () => {
           {({ isSubmitting }) => (
             <Form id="userProfileSettings">
               <FormInput
+              variant="WITH_ICON"
                 placeholder="Nome Completo"
                 width={"70%"}
                 iconSource={userIcon}
@@ -89,6 +90,7 @@ const ProfileSettingsConfig = () => {
               />
 
               <FormInput
+                variant="WITH_ICON"
                 type="email"
                 name="email"
                 placeholder="E-mail"
@@ -99,6 +101,7 @@ const ProfileSettingsConfig = () => {
               />
 
               <PasswordInput
+
                 mb="1.4rem"
                 placeholder="Senha"
                 name="password"
@@ -110,20 +113,23 @@ const ProfileSettingsConfig = () => {
               <Button
               py={"1.2rem"}
               isLoading={isSubmitting}
-              label="Salvar"
               width={"30%"}
               mt="2rem"
-              alignItems="flex"
-              type="submit" children={undefined}/>
+              alignItems="center"
+              type="submit" >
+                Salvar
+              </Button>
 
             <Button
               py={"1.2rem"}
               isLoading={isSubmitting}
               background="red"
-              label="Delete Perfil"
               width={"30%"}
               mt="2rem"
-              type="submit" children={undefined}/>
+              type="submit">
+                Delete Perfil
+              </Button>
+        
             </Form>
           )}
         </Formik>

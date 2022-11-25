@@ -1,12 +1,17 @@
-import { Box, Flex } from "@chakra-ui/react";
-import { AuthPageColumnOptin } from "../../components/AuthPageColumnOptin";
-import { Header } from "../Home/components";
+
+
 import { ProfileSettingsConfig } from "./components"
+import { SideNavigationBar } from "../../components/SideNavigationBar";
+import { Flex } from "@chakra-ui/react";
 
 
 const ProfileSettings = () => {
   return (
-      <ProfileSettingsConfig/>
+
+    // <SideNavigationBar/>
+  
+    < ProfileSettingsConfig />
+ 
   );
 };
 

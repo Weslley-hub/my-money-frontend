@@ -1,5 +1,6 @@
-import { useToast } from "@chakra-ui/react";
+import { Text, useToast, Button as ChackraUiButton } from "@chakra-ui/react";
 import { Form, Formik, FormikHelpers } from "formik";
+import { useNavigate } from "react-router-dom";
 
 import { NewPasswordEmailFormData } from "../types/NewPasswordEmailForm";
 import { initialNewPasswordEmailFormData } from "../utils/defaultNewPasswordEmailFormData";
@@ -12,6 +13,19 @@ import { AuthFormLayout, Button, FormInput } from "../../../../components";
 
 const NewPasswordEmailForm = () => {
   const toast = useToast();
+  const navigate = useNavigate();
+
+  function navigateToLoginPageEmail() {
+    navigate({
+      pathname: "/auth/login",
+    });
+  }
+
+  function EnterPagNewPassword() {
+    navigate({
+      pathname: "/auth/forget-password",
+    });
+  }
 
   function handleChangePassword(
     data: NewPasswordEmailFormData,
@@ -25,13 +39,11 @@ const NewPasswordEmailForm = () => {
     }, 300);
   }
 
-  function goBack() {}
-
   return (
     <AuthFormLayout
       formTitle="Recuperar a senha"
       hasGoBackButton
-      onClickGoBackButton={goBack}
+      onClickGoBackButton={navigateToLoginPageEmail}
     >
       <Formik<NewPasswordEmailFormData>
         initialValues={initialNewPasswordEmailFormData}
@@ -41,6 +53,7 @@ const NewPasswordEmailForm = () => {
         {({ isSubmitting }) => (
           <Form className="forget-password-step-form">
             <FormInput
+              variant="WITH_ICON"
               type="email"
               name="email"
               placeholder="E-mail"
@@ -51,13 +64,15 @@ const NewPasswordEmailForm = () => {
             />
 
             <Button
-              py={"1.2rem"}
-              isLoading={isSubmitting}
-              label="Enviar"
-              width={"80%"}
-              mt="2rem"
-              type="submit"
-            />
+                py={"1.2rem"}
+                isLoading={isSubmitting}
+                width={"50%"}
+                mt="2rem"
+                type="submit"
+                onClick={EnterPagNewPassword}
+              >
+              Enviar
+              </Button>
           </Form>
         )}
       </Formik>
