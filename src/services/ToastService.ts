@@ -6,4 +6,14 @@ export function showSucessToast(toast: CreateToastFnReturn, message: string) {
     isClosable: true,
     description: message,
   });
+ 
+}
+
+export function showErrorToast(toast: CreateToastFnReturn, message: string) {
+  toast({
+    status: "error",
+    isClosable: true,
+    description: message,
+  });
+ 
 }

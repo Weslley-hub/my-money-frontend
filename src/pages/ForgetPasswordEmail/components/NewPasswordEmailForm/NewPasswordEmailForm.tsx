@@ -28,7 +28,6 @@ const NewPasswordEmailForm = () => {
   }
 
   function handleChangePassword(
-    data: NewPasswordEmailFormData,
     formikHelpers: FormikHelpers<NewPasswordEmailFormData>
   ) {
     const { setSubmitting } = formikHelpers;
