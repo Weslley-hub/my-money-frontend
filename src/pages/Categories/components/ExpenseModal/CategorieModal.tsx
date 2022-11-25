@@ -1,4 +1,4 @@
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Spinner, Text, Button as ChakraUiButton } from "@chakra-ui/react";
 import { Formik } from "formik";
 import React, { useImperativeHandle, useMemo, useRef, useState } from "react";
 import {
@@ -12,30 +12,60 @@ import { CategorieFormData } from "../../utils";
 import { ExpenseValidationSchema } from "../../validation";
 import { CategorieModel } from "../../../../models";
 
-export type ExpenseModalHandles = {
+export type CategorieModalHandles = {
   open: (data?: CategorieModel) => void;
   close: () => void;
 };
 
-export type ExpenseModalProps = {};
+export type CategorieModalProps = {};
 
-const ExpenseModalComponent: React.ForwardRefRenderFunction<
-  ExpenseModalHandles,
-  ExpenseModalProps
+const defaultIcons = ["🚘", "🍔", "👴"];
+
+type IconButtonProps = {
+  icon: string;
+  onSelectIcon: (icon: string) => void;
+  isSelected: boolean;
+}
+function IconButton(props: IconButtonProps){
+
+  function handleButtonClick(){
+    console.log("IconButton", props.icon);
+    props.onSelectIcon(props.icon);
+  }
+
+  return (
+    <ChakraUiButton 
+      alignItems={"center"} 
+      justifyContent={"center"} 
+      height={"4rem"} 
+      width={"4rem"} 
+      background={props.isSelected ? "primary.900" : "gray.300"}
+      marginRight={"1rem"}
+      onClick={handleButtonClick}
+    >
+      <Text fontSize={"1.4rem"}>{props.icon}</Text>
+    </ChakraUiButton>
+  );
+}
+
+const CategorieModalComponent: React.ForwardRefRenderFunction<
+  CategorieModalHandles,
+  CategorieModalProps
 > = (props, ref) => {
   const modalRef = useRef<ModalHandles | null>(null);
-  const { addExpense, updateExpense, removeExpense } = useCategorie();
+  const { addCategorie, updateCategorie, removeCategorie} = useCategorie();
 
-  const [selectedExpense, setSelectedExpense] = useState<CategorieModel | null>(
+  const [selectedCategorie, setSelectedCategorie] = useState<CategorieModel | null>(
     null
   );
+  const [selectedIcon, setSelectedIcon] = useState("");
 
   const formInitialValues = useMemo((): CategorieFormData => {
-    if (selectedExpense) {
+    if (selectedCategorie) {
       return {
-        id: selectedExpense.id,
-        description: selectedExpense.description,
-        icon: selectedExpense.icon,
+        id: selectedCategorie.id,
+        description: selectedCategorie.description,
+        icon: selectedCategorie.icon,
       };
     }
 
@@ -44,11 +74,11 @@ const ExpenseModalComponent: React.ForwardRefRenderFunction<
      description: " ",
      icon: " ",
     };
-  }, [selectedExpense]);
+  }, [selectedCategorie]);
 
   function openModal(data?: CategorieModel) {
     modalRef.current?.open();
-    setSelectedExpense(data || null);
+    setSelectedCategorie(data || null);
   }
 
   function closeModal() {
@@ -62,18 +92,24 @@ const ExpenseModalComponent: React.ForwardRefRenderFunction<
     };
   });
 
+  
+  function handleClickIconButton(icon: string){
+    console.log("MODAL", icon);
+    setSelectedIcon(icon);
+  }
+
   async function handleSubmitForm(data: CategorieFormData) {
-    if (!selectedExpense) {
-      addExpense({
+    if (!selectedCategorie) {
+      addCategorie({
         description: data.description,
         icon: "🎈",
         id: " "
       });
     } else {
-      updateExpense({
+      updateCategorie({
         description: data.description,
         icon: "🎈",
-        id: selectedExpense.id
+        id: selectedCategorie.id
       });
     }
 
@@ -81,13 +117,13 @@ const ExpenseModalComponent: React.ForwardRefRenderFunction<
   }
 
   async function handleDeleteExpense() {
-    removeExpense(selectedExpense?.id!);
+    removeCategorie(selectedCategorie?.id!);
     closeModal();
   }
 
   return (
     <Modal
-      title={selectedExpense ? "Atualizar Categoria" : "Cadastrar Categoria"}
+      title={selectedCategorie? "Atualizar Categoria" : "Cadastrar Categoria"}
       ref={modalRef}
     >
       <Formik<CategorieFormData>
@@ -111,17 +147,14 @@ const ExpenseModalComponent: React.ForwardRefRenderFunction<
                 label="Descrição"
               />
               
-             
+              <Flex >
+                {defaultIcons.map(
+                  (icon) => (
+                    <IconButton isSelected={selectedIcon === icon} onSelectIcon={handleClickIconButton} key={icon} icon={icon} />)
+                  )
+                }
+              </Flex>
 
-              <FormInputWithLabel
-                variant="WITHOUT_ICON"
-                formikFieldConfig={{ name: "totalAmount" }}
-                placeholder={"Valor total da despesa"}
-                name="id"
-                marginBottom={"1rem"}
-                label="Valor Total da Despesa"
-                type="number"
-              />
 
               <Flex
                 width={"100%"}
@@ -150,7 +183,7 @@ const ExpenseModalComponent: React.ForwardRefRenderFunction<
                       Salvar
                     </Button>
 
-                    {selectedExpense && (
+                    {selectedCategorie && (
                       <Button
                         onClick={handleDeleteExpense}
                         background={"alert.900"}
@@ -174,5 +207,5 @@ const ExpenseModalComponent: React.ForwardRefRenderFunction<
   );
 };
 
-const ExpenseModal = React.forwardRef(ExpenseModalComponent);
-export { ExpenseModal };
+const CategorieModal = React.forwardRef(CategorieModalComponent);
+export { CategorieModal };

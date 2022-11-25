@@ -6,7 +6,7 @@ type CategorieListProps = {
   width: string;
 };
 
-export type ExpenseModel = {
+export type CategorieModel = {
   description: string;
   icon: string;
   id: string;
@@ -14,21 +14,22 @@ export type ExpenseModel = {
 
 
 const CategorieList = ({ width }: CategorieListProps) => {
-  const { expenses } = useCategorie();
+  const { categories } = useCategorie();
 
   return (
     <>
-      <Box width={width}>
+      <Box width={width} >
         
 
         <Box
           height={"50vh"}
           maxHeight={"50vh"}
-          overflowY={"scroll"}
           marginTop={"2rem"}
+          overflowY={"scroll"}
+        
         >
-          {expenses.map((expense) => (
-            <CategorieCard key={expense.id} data={expense} />
+          {categories.map((categorie) => (
+            <CategorieCard key={categorie.id} data={categorie} />
           ))}
         </Box>
 
