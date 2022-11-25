@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import { Box, useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Box, useToast, ButtonGroup } from "@chakra-ui/react";
+// import { useNavigate } from "react-router-dom";
 import { Form, Formik, FormikHelpers } from "formik";
 
 import "./ProfileSettins.styles.css";
@@ -15,7 +15,6 @@ import {
   Button,
 } from "../../../../components";
 
-
 import { showSucessToast } from "../../../../services/ToastService";
 
 import { emailIcon, userIcon } from "../../../../assets/images/icons";
@@ -23,11 +22,9 @@ import { ProfileSettingsData } from "../../types";
 import { initialProfileSettingsData } from "../../utils";
 import { ProfileSettingsValidationSchema } from "../../validation";
 
-
-
 const ProfileSettingsConfig = () => {
   const toast = useToast();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [selectedAvatar, setSelectedAvatar] = useState<Avatar>(initialAvatar);
 
@@ -35,20 +32,14 @@ const ProfileSettingsConfig = () => {
     setSelectedAvatar(avatar);
   }, []);
 
-  function navigateToButtonProfileSettings() {
-    navigate({
-      pathname: "/auth/login",
-    });
-  }
-
   function handleAlterProfile(
-    data: ProfileSettingsData,
+    _data: ProfileSettingsData,
     formikHelpers: FormikHelpers<ProfileSettingsData>
   ) {
     const { setSubmitting } = formikHelpers;
 
     setTimeout(() => {
-      showSucessToast(toast, "Usuário cadastrado com sucesso");
+      showSucessToast(toast, "Usuário alterado com sucesso");
       setSubmitting(false);
     }, 300);
   }
@@ -64,8 +55,8 @@ const ProfileSettingsConfig = () => {
       />
 
       <Box
-        display={"flex"}
-        width={"80%"}
+        display={"center"}
+        width={"100%"}
         flexDirection={"column"}
         alignItems={"center"}
         mt={{ "2xl": "3rem", lg: "2rem" }}
@@ -76,10 +67,11 @@ const ProfileSettingsConfig = () => {
           onSubmit={handleAlterProfile}
         >
           {({ isSubmitting }) => (
-            <Form id="userProfileSettings">
+            <Form id="userProfileSettings" >
               <FormInput
+              variant="WITH_ICON"
                 placeholder="Nome Completo"
-                width={"70%"}
+                width={"80%"}
                 iconSource={userIcon}
                 mb="1.4rem"
                 type="text"
@@ -89,10 +81,11 @@ const ProfileSettingsConfig = () => {
               />
 
               <FormInput
+                variant="WITH_ICON"
                 type="email"
                 name="email"
                 placeholder="E-mail"
-                width={"70%"}
+                width={"80%"}
                 iconSource={emailIcon}
                 mb="1.4rem"
                 formikFieldConfig={{ name: "email" }}
@@ -102,28 +95,33 @@ const ProfileSettingsConfig = () => {
                 mb="1.4rem"
                 placeholder="Senha"
                 name="password"
-                width={"70%"}
+                width={"80%"}
                 hasClickableIcon
                 formikFieldConfig={{ name: "password" }}
               />
 
+              <ButtonGroup  width="70%" alignContent="center">
               <Button
               py={"1.2rem"}
               isLoading={isSubmitting}
-              label="Salvar"
-              width={"30%"}
+              width={"45%"}
               mt="2rem"
-              alignItems="flex"
-              type="submit" children={undefined}/>
+              alignItems="center"
+              type="submit" >
+                Salvar
+              </Button>
 
             <Button
               py={"1.2rem"}
               isLoading={isSubmitting}
               background="red"
-              label="Delete Perfil"
-              width={"30%"}
+              width={"45%"}
               mt="2rem"
-              type="submit" children={undefined}/>
+              type="submit">
+                Delete Perfil
+              </Button>
+            </ButtonGroup>
+        
             </Form>
           )}
         </Formik>

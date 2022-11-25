@@ -33,6 +33,13 @@ export function LoginForm() {
     showSucessToast(toast, "Login feito com sucesso");
   }
 
+
+  function EnterPagHome() {
+    navigate({
+      pathname: "/",
+    });
+  }
+
   function navigateToLoginPage() {
     navigate({
       pathname: "/auth/register",
@@ -59,6 +66,7 @@ export function LoginForm() {
           return (
             <Form id="LoginForm">
               <FormInput
+                variant="WITH_ICON"
                 type="email"
                 mb={"1rem"}
                 placeholder="E-mail"
@@ -68,6 +76,7 @@ export function LoginForm() {
                 width={"80%"} />
 
               <PasswordInput
+                variant="WITH_ICON"
                 name="password"
                 type="password"
                 placeholder="Senha"
@@ -97,15 +106,15 @@ export function LoginForm() {
                 </ChackraUiButton>
               </Box>
 
-              <Button
-                label="Entrar"
-                width={"80%"}
-                background="primary.900"
-                _active={{ opacity: 0.1 }}
-                _hover={{ background: "primary.900" }}
-                mt={"2rem"}
+                <Button
+                py={"1.2rem"}
+                isLoading={isSubmitting}
+                width={"50%"}
+                mt="2rem"
                 type="submit"
-                isLoading={isSubmitting} />
+                onClick={EnterPagHome}
+              >Entrar
+              </Button>
 
               <Box
                 mt={"1rem"}

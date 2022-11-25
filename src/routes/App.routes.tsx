@@ -6,6 +6,8 @@ import { ForgetPasswordEmail } from "../pages/ForgetPasswordEmail";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
+import { ProfileSettings } from "../pages/ProfileSettings"
+
 
 export function AppRoutes() {
   return (
@@ -16,6 +18,7 @@ export function AppRoutes() {
       <Route path="/auth/forget-password" element={<ForgetPassword />} />
       <Route path="/auth/forget-password-email" element={<ForgetPasswordEmail />} />
       <Route path="/auth/categories" element={<Categories />} />
+      <Route path="/auth/profile-settings" element={<ProfileSettings/>} />
     </Routes>
   );
 }

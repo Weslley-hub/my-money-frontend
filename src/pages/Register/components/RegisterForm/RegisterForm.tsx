@@ -77,6 +77,7 @@ const RegisterForm = () => {
           {({ isSubmitting }) => (
             <Form id="userRegisterForm">
               <FormInput
+                variant="WITH_ICON"
                 placeholder="Nome Completo"
                 width={"80%"}
                 iconSource={userIcon}
@@ -89,6 +90,7 @@ const RegisterForm = () => {
 
               <FormInput
                 type="email"
+                variant="WITH_ICON"
                 name="email"
                 placeholder="E-mail"
                 width={"80%"}
@@ -99,21 +101,22 @@ const RegisterForm = () => {
 
               <PasswordInput
                 mb="1.4rem"
+                variant="WITH_ICON"
                 placeholder="Senha"
                 name="password"
                 width={"80%"}
-                hasClickableIcon
                 formikFieldConfig={{ name: "password" }}
               />
 
               <Button
                 py={"1.2rem"}
                 isLoading={isSubmitting}
-                label="Criar Conta"
                 width={"80%"}
                 mt="2rem"
                 type="submit"
-              />
+              >
+              Criar Conta
+              </Button>
             </Form>
           )}
         </Formik>

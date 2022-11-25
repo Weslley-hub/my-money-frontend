@@ -1,7 +1,9 @@
-import { useToast } from "@chakra-ui/react";
+import { Text, useToast, Button as ChackraUiButton } from "@chakra-ui/react";
 import { Form, Formik, FormikHelpers } from "formik";
 
 import { AuthFormLayout, Button, PasswordInput } from "../../../../components";
+
+import { useNavigate } from "react-router-dom";
 
 import { NewPasswordFormData } from "./types/NewPasswordForm";
 
@@ -12,6 +14,20 @@ import { showSucessToast } from "../../../../services/ToastService";
 
 const NewPasswordForm = () => {
   const toast = useToast();
+  const navigate = useNavigate();
+
+  function navigateToEmailPagePassword() {
+    navigate({
+      pathname: "/auth/forget-password-email",
+    });
+  }
+
+  function EnterLogin() {
+    navigate({
+      pathname: "/auth/login",
+    });
+  }
+
 
   function handleChangePassword(
     data: NewPasswordFormData,
@@ -25,13 +41,11 @@ const NewPasswordForm = () => {
     }, 300);
   }
 
-  function goBack() {}
-
   return (
     <AuthFormLayout
       formTitle="Nova Senha"
       hasGoBackButton
-      onClickGoBackButton={goBack}
+      onClickGoBackButton={navigateToEmailPagePassword}
     >
       <Formik<NewPasswordFormData>
         initialValues={initialNewPasswordFormData}
@@ -41,34 +55,36 @@ const NewPasswordForm = () => {
         {({ isSubmitting }) => (
           <Form className="forget-password-step-form">
             <PasswordInput
-              mb="1.4rem"
-              placeholder="Informe sua nova senha"
-              name="password"
-              width={"80%"}
-              hasClickableIcon
-              formikFieldConfig={{ name: "password" }}
-            />
+                mb="1.4rem"
+                variant="WITH_ICON"
+                placeholder="Informe sua nova senha"
+                name="password"
+                width={"80%"}
+                formikFieldConfig={{ name: "password" }}
+              />
 
-            <PasswordInput
-              mb="1.4rem"
-              placeholder="Confirme sua nova senha"
-              name="passwordConfirmation"
-              width={"80%"}
-              hasClickableIcon
-              formikFieldConfig={{ name: "passwordConfirmation" }}
-            />
+              <PasswordInput
+                mb="1.4rem"
+                variant="WITH_ICON"
+                placeholder="Confirme sua nova senha"
+                name="password"
+                width={"80%"}
+                formikFieldConfig={{ name: "password" }}
+              />
 
             <Button
               py={"1.2rem"}
               isLoading={isSubmitting}
-              label="Confirmar"
-              width={"80%"}
+              width={"50%"}
               mt="2rem"
               type="submit"
-            />
+              onClick={EnterLogin}
+            > 
+            Confirmar
+            </Button>
           </Form>
         )}
-      </Formik>
+      </Formik> 
     </AuthFormLayout>
   );
 };
