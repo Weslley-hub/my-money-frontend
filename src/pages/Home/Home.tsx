@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
+import { Header } from "../../global";
 import {
   ExpensesPerCategortChart,
-  Header,
   MonthlyExpenses,
   MonthlyRevenueStatus,
   RegisterActionButtons

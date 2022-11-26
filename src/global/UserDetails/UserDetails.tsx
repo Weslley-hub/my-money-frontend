@@ -1,7 +1,6 @@
 import { Flex, Heading, Image } from "@chakra-ui/react";
-
-import { manAvatar1 } from "../../../../assets/images/avatars";
-import { gearIcon, logoutIcon } from "../../../../assets/images/icons";
+import { manAvatar1 } from "../../assets/images/avatars";
+import { gearIcon, logoutIcon } from "../../assets/images/icons";
 
 import { UserDetailsActionButton } from "./components/UserDetailsButton";
 
