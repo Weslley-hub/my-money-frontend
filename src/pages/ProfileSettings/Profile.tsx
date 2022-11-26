@@ -3,7 +3,8 @@
 import { ProfileSettingsConfig } from "./components";
 import { SideNavigationBar } from "../../components/SideNavigationBar";
 import { Flex, Box } from "@chakra-ui/react";
-import { Header} from "../Home/components"
+import { Header } from "../../global";
+
 
 const ProfileSettings = () => {
   return (

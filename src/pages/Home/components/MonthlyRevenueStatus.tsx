@@ -46,7 +46,11 @@ const MonthlyRevenueStatus = (props: MonthlyRevenueStatusProps) => {
         </Box>
       </Flex>
 
-      <UpdateDeleteButtonGroup />
+      <UpdateDeleteButtonGroup onClickDeleteExpenseButton={function (): void {
+        throw new Error("Function not implemented.");
+      } } onClickUpdateExpenseButton={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
     </Flex>
   );
 };

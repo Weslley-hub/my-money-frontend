@@ -1,8 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
+import { Header } from "../../global";
 import { themePallete } from "../../global/styles/theme";
 import {
-  
-  Header,
+
   CategorieList,
   RegisterActionButtons
 } from "./components";

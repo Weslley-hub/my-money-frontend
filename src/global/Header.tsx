@@ -1,5 +1,5 @@
 import { Flex, Image } from "@chakra-ui/react";
-import { logoHorizontal } from "../../../assets/images/logos";
+import { logoHorizontal } from "../assets/images/logos";
 import { UserDetails } from "./UserDetails";
 
 const Header = () => {
