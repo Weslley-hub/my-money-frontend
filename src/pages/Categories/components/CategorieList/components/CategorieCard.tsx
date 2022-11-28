@@ -1,8 +1,9 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { UpdateDeleteButtonGroup } from "../../../../../components/UpdateDeleteButtonGroup";
 import { themePallete } from "../../../../../global/styles/theme";
 import { CategorieModel } from "../../../../../models";
 import { useCategorie } from "../../../contexts/Categorie.context";
-import { UpdateDeleteButtonGroup } from "../../UpdateDeleteButtonGroup";
+
 
 type CategorieCardProps = {
   data: CategorieModel;

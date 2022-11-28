@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
+import { ButtonWithIcon } from "../../../../components/ButtonWithIcon";
 
-import { ButtonWithIcon } from "../ButtonWithIcon";
 import { themePallete } from "../../../../global/styles/theme";
 import { useExpenses } from "../../contexts/Expenses.context";
 
