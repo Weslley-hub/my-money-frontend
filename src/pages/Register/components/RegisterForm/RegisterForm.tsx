@@ -33,9 +33,9 @@ const RegisterForm = () => {
     setSelectedAvatar(avatar);
   }, []);
 
-  function navigateToLoginPage() {
+  function navigateToHomePage() {
     navigate({
-      pathname: "/auth/login",
+      pathname: "/",
     });
   }
 
@@ -55,7 +55,7 @@ const RegisterForm = () => {
     <AuthFormLayout
       formTitle="Criar Conta"
       hasGoBackButton
-      onClickGoBackButton={navigateToLoginPage}
+      onClickGoBackButton={navigateToHomePage}
     >
       <AvatarSelector
         onChangeSelectedAvatar={onChangeSelectedAvatar}
@@ -111,6 +111,7 @@ const RegisterForm = () => {
               <Button
                 py={"1.2rem"}
                 isLoading={isSubmitting}
+                onClick={navigateToHomePage}
                 width={"80%"}
                 mt="2rem"
                 type="submit"

@@ -1,5 +1,3 @@
-
-
 import { ProfileSettingsConfig } from "./components";
 import { SideNavigationBar } from "../../components/SideNavigationBar";
 import { Flex, Box } from "@chakra-ui/react";
@@ -11,7 +9,7 @@ const ProfileSettings = () => {
         
     <Box height="100hv" width="100%" >
         <Header />
-        <Flex  height="100hv" width="100%" alignItems="center">
+        <Flex  height="80hv" width="100%" alignItems="center">
           <SideNavigationBar/>
           < ProfileSettingsConfig />
         </Flex>

@@ -8,7 +8,6 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ProfileSettings } from "../pages/ProfileSettings"
 
-
 export function AppRoutes() {
   return (
     <Routes>

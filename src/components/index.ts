@@ -9,3 +9,4 @@ export * from "./Modal";
 export * from "./FormSelect";
 export * from "./FormInputWithLabel";
 export * from "./FormSelect";
+export * from "./Header";

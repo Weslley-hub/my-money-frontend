@@ -69,9 +69,9 @@ const ProfileSettingsConfig = () => {
           {({ isSubmitting }) => (
             <Form id="userProfileSettings" >
               <FormInput
-              variant="WITH_ICON"
+                variant="WITH_ICON"
                 placeholder="Nome Completo"
-                width={"80%"}
+                width={"70%"}
                 iconSource={userIcon}
                 mb="1.4rem"
                 type="text"
@@ -85,7 +85,7 @@ const ProfileSettingsConfig = () => {
                 type="email"
                 name="email"
                 placeholder="E-mail"
-                width={"80%"}
+                width={"70%"}
                 iconSource={emailIcon}
                 mb="1.4rem"
                 formikFieldConfig={{ name: "email" }}
@@ -95,12 +95,12 @@ const ProfileSettingsConfig = () => {
                 mb="1.4rem"
                 placeholder="Senha"
                 name="password"
-                width={"80%"}
+                width={"70%"}
                 hasClickableIcon
                 formikFieldConfig={{ name: "password" }}
               />
 
-              <ButtonGroup  width="70%" alignContent="center">
+              <ButtonGroup  width="70%" justifyContent="center">
               <Button
               py={"1.2rem"}
               isLoading={isSubmitting}
