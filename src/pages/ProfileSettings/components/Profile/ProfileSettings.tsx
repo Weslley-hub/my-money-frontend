@@ -21,10 +21,11 @@ import { emailIcon, userIcon } from "../../../../assets/images/icons";
 import { ProfileSettingsData } from "../../types";
 import { initialProfileSettingsData } from "../../utils";
 import { ProfileSettingsValidationSchema } from "../../validation";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSettingsConfig = () => {
   const toast = useToast();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [selectedAvatar, setSelectedAvatar] = useState<Avatar>(initialAvatar);
 
@@ -44,10 +45,17 @@ const ProfileSettingsConfig = () => {
     }, 300);
   }
 
+  function navigateToHomePagesSettings() {
+    navigate({
+      pathname: "/",
+    });
+  }
+
   return (
     <AuthFormLayout
       formTitle=""
       hasGoBackButton
+      onClickGoBackButton={navigateToHomePagesSettings}
     >
       <AvatarSelector
         onChangeSelectedAvatar={onChangeSelectedAvatar}
