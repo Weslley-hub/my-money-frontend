@@ -1,4 +1,4 @@
-import { Box, Flex, Stack } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -47,6 +47,7 @@ const SideNavigationBar  = () => {
               width={"80%"}
               mt="2rem"
               alignItems="center"
+              justifyContent="flex-start"
               type="submit" 
               onClick={ProfileSettings}
               >
@@ -56,13 +57,14 @@ const SideNavigationBar  = () => {
 
               <Flex  alignItems="center" justifyContent="center">
                <Button
-               background="primary.900"
+              background="primary.900"
               borderRightRadius="80px"
               borderBottomRightRadius="80px"
               py="1.2rem"
               width="80%"
               mt="2rem"
               alignItems="center"
+              justifyContent="flex-start"
               type="submit"         
               onClick={MyCards}
               >
@@ -79,6 +81,7 @@ const SideNavigationBar  = () => {
               width="80%"
               mt="2rem"
               alignItems="center"
+              justifyContent="flex-start"
               type="submit" 
               onClick={MyCategories}
               >
@@ -95,6 +98,7 @@ const SideNavigationBar  = () => {
               width="80%"
               mt="2rem"
               alignItems="center"
+              justifyContent="flex-start"
               type="submit" 
               onClick={MyRevenues}
               >

@@ -1,10 +1,10 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { AiFillInfoCircle } from "react-icons/ai";
+import { UpdateDeleteButtonGroup } from "../../../../../components/UpdateDeleteButtonGroup";
 
 import { themePallete } from "../../../../../global/styles/theme";
 import { ExpenseModel } from "../../../../../models";
 import { useExpenses } from "../../../contexts/Expenses.context";
-import { UpdateDeleteButtonGroup } from "../../UpdateDeleteButtonGroup";
 
 type ExpenseCardProps = {
   data: ExpenseModel;

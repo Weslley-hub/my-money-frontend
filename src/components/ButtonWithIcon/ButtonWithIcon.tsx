@@ -1,5 +1,6 @@
 import { ButtonProps, Flex, Text } from "@chakra-ui/react";
-import { Button } from "../../../../components";
+import { Button } from "../Button";
+
 
 import "./ButtonWithIcon.styles.css";
 

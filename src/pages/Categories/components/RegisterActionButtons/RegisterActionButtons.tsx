@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
-import { ButtonWithIcon } from "../ButtonWithIcon";
+import { ButtonWithIcon } from "../../../../components/ButtonWithIcon";
+
 import { themePallete } from "../../../../global/styles/theme";
 import { useCategorie } from "../../contexts/Categorie.context";
 
@@ -12,8 +13,6 @@ const RegisterActionButtons = ({}: RegisterActionButtonsProps) => {
   function openRegisterExpenseModal() {
     openCategorieModal();
   }
-
-  
 
   return (
     <Flex alignItems={"center"} justifyContent={"center"}>

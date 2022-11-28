@@ -1,8 +1,8 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { AiFillInfoCircle } from "react-icons/ai";
+import { UpdateDeleteButtonGroup } from "../../../components/UpdateDeleteButtonGroup";
 
 import { themePallete } from "../../../global/styles/theme";
-import { UpdateDeleteButtonGroup } from "./UpdateDeleteButtonGroup";
 
 type MonthlyRevenueStatusProps = {
   width: string;
