@@ -4,13 +4,23 @@ import { gearIcon, logoutIcon } from "../../assets/images/icons";
 
 import { UserDetailsActionButton } from "./components/UserDetailsButton";
 
+import { useNavigate } from "react-router-dom";
+
+
 const UserDetails = () => {
+  const navigate = useNavigate();
+
+
   function handleLogout() {
-    console.log("Handle Logout");
+    navigate({
+            pathname: "/auth/login",
+    });
   }
 
   function navigateToSettings() {
-    console.log("Navigate to settings page");
+    navigate({
+            pathname: "/auth/profile-settings",
+    });
   }
 
   return (
@@ -42,7 +52,6 @@ const UserDetails = () => {
           />
         </Flex>
       </Flex>
-
       <Image src={manAvatar1} height={"3.5rem"} width={"3.5rem"} alt="Avatar" />
     </Flex>
   );

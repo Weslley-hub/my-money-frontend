@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -34,10 +34,13 @@ const SideNavigationBar  = () => {
     });
   }
 
-  return (
-    <Box height="100vh" width="20%" background="white">
 
+  return (
+    <Box height="100vh" width="20%" alignItems="center" borderWidth="thin" >
+          <Stack>
+            <Flex  alignItems="center" justifyContent="center">
              <Button
+              color="white"
               background="primary.900"
               borderRightRadius="80px"
               borderBottomRightRadius="80px"
@@ -50,13 +53,17 @@ const SideNavigationBar  = () => {
               >
                 Meu Perfil
               </Button>
+              </Flex>
+            
+             
 
+              <Flex  alignItems="center" justifyContent="center">
                <Button
                background="primary.900"
               borderRightRadius="80px"
               borderBottomRightRadius="80px"
-              py={"1.2rem"}
-              width={"80%"}
+              py="1.2rem"
+              width="80%"
               mt="2rem"
               alignItems="center"
               type="submit"         
@@ -64,13 +71,15 @@ const SideNavigationBar  = () => {
               >
                 Meus Cartões
               </Button>
+              </Flex>
 
+              <Flex alignItems="center" justifyContent="center">
                <Button
                background="primary.900"
               borderRightRadius="80px"
               borderBottomRightRadius="80px"
-              py={"1.2rem"}
-              width={"80%"}
+              py="1.2rem"
+              width="80%"
               mt="2rem"
               alignItems="center"
               type="submit" 
@@ -78,13 +87,15 @@ const SideNavigationBar  = () => {
               >
                 Minhas Categórias
               </Button>
+              </Flex>
 
+              <Flex alignItems="center" justifyContent="center">
                <Button
                background="primary.900"
               borderRightRadius="80px"
               borderBottomRightRadius="80px"
-              py={"1.2rem"}
-              width={"80%"}
+              py="1.2rem"
+              width="80%"
               mt="2rem"
               alignItems="center"
               type="submit" 
@@ -92,6 +103,8 @@ const SideNavigationBar  = () => {
               >
                 Minhas Receitas
               </Button>
+              </Flex>
+              </Stack>
           </Box>
   );
 };
