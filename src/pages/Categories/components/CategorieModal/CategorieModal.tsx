@@ -20,7 +20,7 @@ export type CategorieModalHandles = {
 
 export type CategorieModalProps = {};
 
-const defaultIcons = ["🚘", "🍔", "👴"];
+const defaultIcons = ["🚘", "🍔", "🏠"];
 
 type IconButtonProps = {
   icon: string;

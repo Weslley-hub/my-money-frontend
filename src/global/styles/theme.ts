@@ -24,7 +24,7 @@ const themePallete = {
       900: "#7A7A7A"
     },
     externalInputLabel: {
-      900: "6F6F6F"
+      900: "#6F6F6F"
     },
     iputIcon: {
       900: "#808080"

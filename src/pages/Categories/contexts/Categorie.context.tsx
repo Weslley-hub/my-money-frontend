@@ -19,22 +19,17 @@ type CategorieProviderProps = {
 };
 
 const initialState: CategorieModel[]= [
-  {
-    id: "1",
-  description: "Automovel",
-  icon:"🚘"
+  { 
+    id: "1", description: "Automovel", icon:"🚘"
   },
+
   {
-  id: "2",
-  description: "Alimentação",
-  icon:"🍔"
+   id: "2", description: "Alimentação", icon:"🍔"
   },
+
   {
-    id: "3",
-    description: "Jorge",
-    icon:"👴"
-    }
-  
+   id: "3", description: "Residência", icon:"🏠"
+  }
   
   ];
 export const CategorieProvider = ({ children }: CategorieProviderProps) => {

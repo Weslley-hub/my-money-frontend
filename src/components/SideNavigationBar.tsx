@@ -34,10 +34,9 @@ const SideNavigationBar  = () => {
     });
   }
 
-
   return (
-    <Box height="100vh" width="20%" alignItems="center" borderWidth="thin" >
-          <Stack>
+    <Box height="100vh" width="20%" alignItems="center" borderWidth="thin" background="accent.900" >
+          
             <Flex  alignItems="center" justifyContent="center">
              <Button
               color="white"
@@ -54,8 +53,6 @@ const SideNavigationBar  = () => {
                 Meu Perfil
               </Button>
               </Flex>
-            
-             
 
               <Flex  alignItems="center" justifyContent="center">
                <Button
@@ -104,7 +101,7 @@ const SideNavigationBar  = () => {
                 Minhas Receitas
               </Button>
               </Flex>
-              </Stack>
+              
           </Box>
   );
 };
