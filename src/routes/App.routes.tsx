@@ -6,8 +6,10 @@ import { ForgetPasswordEmail } from "../pages/ForgetPasswordEmail";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
-import { ProfileSettings } from "../pages/ProfileSettings"
-import { Revenues } from "../pages/Revenues"
+import { ProfileSettings } from "../pages/ProfileSettings";
+import { ModalRevenue } from "../pages/ModalRevenue"
+
+import { Revenues } from "../pages/Revenues";
 
 export function AppRoutes() {
   return (
@@ -19,7 +21,14 @@ export function AppRoutes() {
       <Route path="/auth/forget-password-email" element={<ForgetPasswordEmail />} />
       <Route path="/categories" element={<Categories />} />
       <Route path="/profile-settings" element={<ProfileSettings/>} />
-     <Route path="/revenues" element={<Revenues/>} /> 
+      <Route path="/modal-revenue" element={<ModalRevenue/>} />
+     <Route path="/revenues" element={<Revenues data={{
+              id: "",
+              month: "",
+              year: 0,
+              usedAmount: 0,
+              totalAmount: 0
+          }} />} /> 
     </Routes>
   );
 }

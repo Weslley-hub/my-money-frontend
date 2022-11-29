@@ -3,18 +3,21 @@ import { FaPlus } from "react-icons/fa";
 import { ButtonWithIcon } from "../../../../components/ButtonWithIcon";
 
 import { themePallete } from "../../../../global/styles/theme";
-import { useExpenses } from "../../contexts/Expenses.context";
+import { useExpenses, useRevenues } from "../../contexts";
 
 type RegisterActionButtonsProps = {};
 
 const RegisterActionButtons = ({}: RegisterActionButtonsProps) => {
   const { openExpenseModal } = useExpenses();
+  const { openRevenueModal } = useRevenues();
 
   function openRegisterExpenseModal() {
     openExpenseModal();
   }
 
-  function openRegisterRevenueModal() {}
+  function openRegisterRevenueModal() {
+    openRevenueModal();
+  }
 
   return (
     <Flex alignItems={"center"} justifyContent={"center"}>
