@@ -1,13 +1,13 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
-import { CategorieModel,  } from "../../../models";
+import { Card } from "../../../models/Card";
 import { CategorieModal, CategorieModalHandles } from "../components";
 
 export type CategorieContextData = {
-  categories: CategorieModel[];
-  addCategorie: (categorie: CategorieModel) => void;
-  updateCategorie: (updatedCategorie: CategorieModel) => void;
+  categories: Card[];
+  addCategorie: (categorie: Card) => void;
+  updateCategorie: (updatedCategorie: Card) => void;
   removeCategorie: (categorieId: string) => void;
-  openCategorieModal(data?: CategorieModel): void;
+  openCategorieModal(data?: Card): void;
 };
 
 const CategorieContext = createContext<CategorieContextData>(
@@ -18,21 +18,30 @@ type CategorieProviderProps = {
   children: ReactNode;
 };
 
-const initialState: CategorieModel[]= [
+const initialState: Card[]= [
   {
-    id: "1",
-  description: "Automovel",
-  icon:"🚘"
+  id: "1",
+  name: "Automovel",
+  flag:"🚘",
+  number :"123",
+  type: "CREDIT_CARD"
+  
   },
   {
-  id: "2",
-  description: "Alimentação",
-  icon:"🍔"
+    id: "2",
+  name: "Alimentação",
+  flag:"🍔",
+  number :"456",
+  type: "DEBIT_CARD"
+  
   },
   {
     id: "3",
-    description: "Jorge",
-    icon:"👴"
+    name: "Pai",
+    flag:"🧙‍♂️",
+    number :"789",
+    type: "DEBIT_CREDIT_CARD"
+    
     }
   
   
@@ -40,9 +49,9 @@ const initialState: CategorieModel[]= [
 export const CategorieProvider = ({ children }: CategorieProviderProps) => {
   const categorieModalRef = useRef<CategorieModalHandles | null>(null);
 
-  const [categories, setCategories] = useState<CategorieModel[]>(initialState);
+  const [categories, setCategories] = useState<Card[]>(initialState);
 
-  function addCategorie(categorie: CategorieModel) {
+  function addCategorie(categorie: Card) {
     const newCategories = [
       ...categories,
       { ...categorie, id: new Date().toISOString() }
@@ -50,7 +59,7 @@ export const CategorieProvider = ({ children }: CategorieProviderProps) => {
     setCategories(newCategories);
   }
 
-  function updateCategorie(updatedCategorie: CategorieModel) {
+  function updateCategorie(updatedCategorie: Card) {
     const otherCategories = categories.filter(
       (categorie) => categorie.id !== updatedCategorie.id
     );
@@ -64,7 +73,7 @@ export const CategorieProvider = ({ children }: CategorieProviderProps) => {
     setCategories(remainingCategories);
   }
 
-  function openCategorieModal(data?: CategorieModel) {
+  function openCategorieModal(data?: Card) {
     categorieModalRef.current?.open(data);
   }
 

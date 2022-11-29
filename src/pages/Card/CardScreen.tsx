@@ -25,7 +25,7 @@ const CardScreen = () => {
           >
             <Box fontSize={"1.8rem"} fontFamily = {"inter"} color={themePallete.colors.accentText[900]}
             paddingX = {"300px"}>
-              Minhas Categorias</Box>
+              Meus cartões</Box>
             <RegisterActionButtons />
           </Flex>
 

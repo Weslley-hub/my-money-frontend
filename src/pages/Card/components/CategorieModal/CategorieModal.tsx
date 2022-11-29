@@ -8,13 +8,12 @@ import {
   ModalHandles
 } from "../../../../components";
 import { useCategorie } from "../../contexts/Categorie.context";
-import { CategorieFormData } from "../../utils";
 import { CategorieValidationSchema } from "../../validation";
-import { CategorieModel } from "../../../../models";
-import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
+import { showErrorToast } from "../../../../services/ToastService";
+import { Card } from "../../../../models/Card";
 
 export type CategorieModalHandles = {
-  open: (data?: CategorieModel) => void;
+  open: (data?: Card) => void;
   close: () => void;
 };
 
@@ -58,28 +57,32 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
   const modalRef = useRef<ModalHandles | null>(null);
   const { addCategorie, updateCategorie, removeCategorie} = useCategorie();
 
-  const [selectedCategorie, setSelectedCategorie] = useState<CategorieModel | null>(
+  const [selectedCategorie, setSelectedCategorie] = useState<Card | null>(
     null
   );
   const [selectedIcon, setSelectedIcon] = useState("");
 
-  const formInitialValues = useMemo((): CategorieFormData => {
+  const formInitialValues = useMemo((): Card => {
     if (selectedCategorie) {
       return {
         id: selectedCategorie.id,
-        description: selectedCategorie.description,
-        icon: selectedCategorie.icon,
+        name: selectedCategorie.name,
+        number: selectedCategorie.number,
+        flag: selectedCategorie.flag,
+        type: selectedCategorie.type,
       };
     }
 
     return {
-     id: " ",
-     description: " ",
-     icon: " ",
+      id: " ",
+      number: " ",
+      name: " ",
+      flag: " ",
+      type: "DEBIT_CARD",
     };
   }, [selectedCategorie]);
 
-  function openModal(data?: CategorieModel) {
+  function openModal(data?: Card) {
     modalRef.current?.open();
     setSelectedCategorie(data || null);
   }
@@ -100,7 +103,7 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
     setSelectedIcon(icon);
   }
   const toast = useToast();
-  async function handleSubmitForm(data: CategorieFormData) {
+  async function handleSubmitForm(data: Card) {
 
     
      if(!selectedIcon){
@@ -111,15 +114,19 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
 
     if (!selectedCategorie) {
       addCategorie({
-        description: data.description,
-        icon: selectedIcon,
-        id: " "
+        name: data.name,
+        flag: selectedIcon,
+        id: " ",
+        number: data.number,
+        type: data.type,
       });
     } else {
       updateCategorie({
-        description: data.description,
-        icon: selectedIcon,
-        id: selectedCategorie.id
+        name: data.name,
+        flag: selectedIcon,
+        id: selectedCategorie.id,
+        number: data.number,
+        type: data.type,
       });
     }
 
@@ -137,7 +144,7 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
       ref={modalRef}
       
     >
-      <Formik<CategorieFormData> 
+      <Formik<Card> 
         initialValues={formInitialValues}
         onSubmit={async (data, { setSubmitting }) => {
           setSubmitting(true);
@@ -170,17 +177,25 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
         <Box alignSelf={"flex-end"}>
         <FormInputWithLabel
                 variant="WITHOUT_ICON"
-                formikFieldConfig={{ name: "description" }}
+                formikFieldConfig={{ name: "name" }}
                 placeholder={"Nome da categoria"}
-                name="description"
+                name="name"
                 marginBottom={"1rem"}
                 label=""
                
                 
               />
               </Box>
-        </Flex>
               
+        </Flex>
+        <FormInputWithLabel
+                variant="WITHOUT_ICON"
+                formikFieldConfig={{ name: "number" }}
+                placeholder={"Descrição da Despesa"}
+                name="number"
+                marginBottom={"1rem"}
+                label="Descrição"
+              />
               
               <Flex paddingY={"40px"} marginLeft = {"7rem"}>
                 {defaultIcons.map(
