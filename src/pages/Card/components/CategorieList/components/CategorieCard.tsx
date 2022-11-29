@@ -1,11 +1,12 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { UpdateDeleteButtonGroup } from "../../../../../components/UpdateDeleteButtonGroup";
 import { themePallete } from "../../../../../global/styles/theme";
-import { CategorieModel } from "../../../../../models";
+
+import { Card } from "../../../../../models/Card";
 import { useCategorie } from "../../../contexts/Categorie.context";
-import { UpdateDeleteButtonGroup } from "../../UpdateDeleteButtonGroup";
 
 type CategorieCardProps = {
-  data: CategorieModel;
+  data: Card;
 };
 
 const CategorieCard = ({ data: categorie }: CategorieCardProps) => {
@@ -20,10 +21,45 @@ const CategorieCard = ({ data: categorie }: CategorieCardProps) => {
   }
 
   return (
-    <Box width={"90%"} marginBottom={"1rem"} paddingY={"1rem"} paddingX={"1rem"} background={"gray.500"}>
-      <Text>{categorie.description}</Text>
-      <Text>Nº {categorie.icon}</Text>
+    <Flex
+      height={"9rem"}
+      width={"90%"}
+      marginBottom={"2rem"}
+      background={"accent.900"}
+      borderRadius="4px"
+      alignItems={"center"}
+      
+    >
+     
       <Flex
+        justifyContent={"center"}
+        width={"100%"}
+        paddingX={"1rem"}
+        flexDirection={"column"}
+      >
+        
+        <Flex alignItems={"center"} justifyContent={"space-between"}>
+          <Flex alignItems={"center"}>
+            <Text
+              color={themePallete.colors.primary[900]}
+              fontSize={"3rem"}
+              mb={"0.2rem"}
+            >
+              {categorie.flag}
+            </Text>
+
+            <Box marginLeft={"0.6rem"}>
+              <Text>
+                {categorie.name}
+                {categorie.number}
+                {categorie.type}
+                </Text>
+
+            
+            </Box>
+          </Flex>
+
+          <Flex
             flexDirection={"column"}
             height={"100%"}
             justifyContent={"center"}
@@ -41,7 +77,9 @@ const CategorieCard = ({ data: categorie }: CategorieCardProps) => {
             >
             </Flex>
           </Flex>
-    </Box>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 };
 

@@ -7,6 +7,7 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ProfileSettings } from "../pages/ProfileSettings"
+import { CardScreen } from "../pages/Card";
 // import { Revenues } from "../pages/Revenues"
 
 export function AppRoutes() {
@@ -19,6 +20,7 @@ export function AppRoutes() {
       <Route path="/auth/forget-password-email" element={<ForgetPasswordEmail />} />
       <Route path="/auth/categories" element={<Categories />} />
       <Route path="/auth/profile-settings" element={<ProfileSettings/>} />
+      <Route path="/auth/cards" element={<CardScreen/>} />
       {/* <Route path="/auth/revenues" element={<Revenues/>} /> */}
     </Routes>
   );
