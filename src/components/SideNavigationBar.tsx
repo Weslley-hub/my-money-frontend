@@ -1,4 +1,8 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Text} from "@chakra-ui/react";
+import { FaUserAlt } from "react-icons/fa"
+import { BsFillCreditCardFill } from "react-icons/bs"
+import { AiFillStar } from "react-icons/ai"
+import { MdAttachMoney } from "react-icons/md"
 
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +39,7 @@ const SideNavigationBar  = () => {
   }
 
   return (
-    <Box height="100vh" width="20%" alignItems="center" borderWidth="thin" background="accent.900" >
+    <Box height="100vh" width="25%" alignItems="center" borderWidth="thin" background="accent.900" >
           
             <Flex  alignItems="center" justifyContent="center">
              <Button
@@ -51,7 +55,12 @@ const SideNavigationBar  = () => {
               type="submit" 
               onClick={ProfileSettings}
               >
-                Meu Perfil
+                <Box marginRight={2}>
+                 <FaUserAlt size={16}/>
+                </Box>
+                
+                <Text >Meu Perfil</Text>
+               
               </Button>
               </Flex>
 
@@ -68,7 +77,12 @@ const SideNavigationBar  = () => {
               type="submit"         
               onClick={MyCards}
               >
-                Meus Cartões
+                <Box marginRight={2} >
+                  <BsFillCreditCardFill size={16} />
+                </Box>
+                
+                <Text> Meus Cartões </Text>
+                
               </Button>
               </Flex>
 
@@ -85,7 +99,12 @@ const SideNavigationBar  = () => {
               type="submit" 
               onClick={MyCategories}
               >
-                Minhas Categórias
+                <Box paddingRight={2}>
+                <AiFillStar size={20} />
+                </Box>
+                
+                <Text> Minhas Categórias </Text> 
+                
               </Button>
               </Flex>
 
@@ -102,7 +121,11 @@ const SideNavigationBar  = () => {
               type="submit" 
               onClick={MyRevenues}
               >
-                Minhas Receitas
+                <Box paddingRight={2}>
+                <MdAttachMoney size={20}/>
+                </Box>
+                
+                <Text> Minhas Receitas </Text>
               </Button>
               </Flex>
               
