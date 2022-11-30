@@ -7,9 +7,10 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ProfileSettings } from "../pages/ProfileSettings";
-import { ModalRevenue } from "../pages/ModalRevenue"
-
 import { Revenues } from "../pages/Revenues";
+import { ProfileSettings } from "../pages/ProfileSettings"
+import { CardScreen } from "../pages/Card";
+
 
 export function AppRoutes() {
   return (
@@ -22,7 +23,9 @@ export function AppRoutes() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/profile-settings" element={<ProfileSettings/>} />
       <Route path="/modal-revenue" element={<ModalRevenue/>} />
-     <Route path="/revenues" element={<Revenues />} /> 
+      <Route path="/revenues" element={<Revenues />} /> 
+      <Route path="/cards" element={<CardScreen/>} />
+      
     </Routes>
   );
 }

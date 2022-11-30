@@ -1,1 +1,1 @@
-export * from "./CategorieSchema";
+export * from "./CardValidationSchema";

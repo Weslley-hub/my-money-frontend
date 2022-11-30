@@ -1,4 +1,4 @@
 
 export * from "./RegisterActionButtons";
-export * from "./CategorieModal";
-export * from "./CategorieList";
+export * from "./CardModal";
+export * from "./CardListing";

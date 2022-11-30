@@ -1,91 +1,100 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
-import { CategorieModel,  } from "../../../models";
-import { CategorieModal, CategorieModalHandles } from "../components";
+import { Card } from "../../../models/Card";
+import { CardModal, CardModalHandles } from "../components";
 
-export type CategorieContextData = {
-  categories: CategorieModel[];
-  addCategorie: (categorie: CategorieModel) => void;
-  updateCategorie: (updatedCategorie: CategorieModel) => void;
-  removeCategorie: (categorieId: string) => void;
-  openCategorieModal(data?: CategorieModel): void;
+export type CardContextData = {
+  cards: Card[];
+  addCard: (card: Card) => void;
+  updateCard: (updatedCard: Card) => void;
+  removeCard: (cardId: string) => void;
+  openCardModal(data?: Card): void;
 };
 
-const CategorieContext = createContext<CategorieContextData>(
-  {} as CategorieContextData
+const CardContext = createContext<CardContextData>(
+  {} as CardContextData
 );
 
-type CategorieProviderProps = {
+type CardProviderProps = {
   children: ReactNode;
 };
 
-const initialState: CategorieModel[]= [
+const initialState: Card[]= [
   {
-    id: "1",
-  description: "Automovel",
-  icon:"🚘"
+  id: "1",
+  name: "Automovel",
+  flag:"🚘",
+  number :"123",
+  type: "Crédito"
+  
   },
   {
-  id: "2",
-  description: "Alimentação",
-  icon:"🍔"
+    id: "2",
+  name: "Alimentação",
+  flag:"🍔",
+  number :"456",
+  type: "Débito"
+  
   },
   {
     id: "3",
-    description: "Jorge",
-    icon:"👴"
+    name: "Pai",
+    flag:"🧙‍♂️",
+    number :"789",
+    type: "DEBIT_CREDIT_CARD"
+    
     }
   
   
   ];
-export const CategorieProvider = ({ children }: CategorieProviderProps) => {
-  const categorieModalRef = useRef<CategorieModalHandles | null>(null);
+export const CardProvider = ({ children }: CardProviderProps) => {
+  const cardModalRef = useRef<CardModalHandles | null>(null);
 
-  const [categories, setCategories] = useState<CategorieModel[]>(initialState);
+  const [cards, setCards] = useState<Card[]>(initialState);
 
-  function addCategorie(categorie: CategorieModel) {
-    const newCategories = [
-      ...categories,
-      { ...categorie, id: new Date().toISOString() }
+  function addCard(card: Card) {
+    const newCard = [
+      ...cards,
+      { ...card, id: new Date().toISOString() }
     ];
-    setCategories(newCategories);
+    setCards(newCard);
   }
 
-  function updateCategorie(updatedCategorie: CategorieModel) {
-    const otherCategories = categories.filter(
-      (categorie) => categorie.id !== updatedCategorie.id
+  function updateCard(updatedCard: Card) {
+    const otherCards = cards.filter(
+      (card) => card.id !== updatedCard.id
     );
-    setCategories([...otherCategories, updatedCategorie]);
+    setCards([...otherCards, updatedCard]);
   }
 
-  function removeCategorie(categorieId: string) {
-    const remainingCategories = categories.filter(
-      (categorie) => categorie.id !== categorieId
+  function removeCard(cardId: string) {
+    const remainingCards = cards.filter(
+      (card) => card.id !== cardId
     );
-    setCategories(remainingCategories);
+    setCards(remainingCards);
   }
 
-  function openCategorieModal(data?: CategorieModel) {
-    categorieModalRef.current?.open(data);
+  function openCardModal(data?: Card) {
+    cardModalRef.current?.open(data);
   }
 
   return (
-    <CategorieContext.Provider
+    <CardContext.Provider
       value={{
-        categories,
-        addCategorie,
-        removeCategorie,
-        updateCategorie,
-        openCategorieModal
+        cards,
+        addCard,
+        removeCard,
+        updateCard,
+        openCardModal
       }}
     >
       {children}
 
-      <CategorieModal ref={categorieModalRef} />
-    </CategorieContext.Provider>
+      <CardModal ref={cardModalRef} />
+    </CardContext.Provider>
   );
 };
 
-export const useCategorie = (): CategorieContextData => {
-  const contextData = useContext(CategorieContext);
+export const useCard = (): CardContextData => {
+  const contextData = useContext(CardContext);
   return { ...contextData };
 };
