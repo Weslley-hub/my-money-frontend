@@ -1,8 +1,19 @@
-import { Flex, Spinner, Text, Button as ChakraUiButton, useToast, Icon, Box } from "@chakra-ui/react";
-import { Formik } from "formik";
-import React, { useImperativeHandle, useMemo, useRef, useState } from "react";
+import {
+  Flex,
+  Spinner,
+  Text,
+  Button as ChakraUiButton,
+  useToast,
+  Box
+} from "@chakra-ui/react";
+
+import { FaPlus } from "react-icons/fa";
+
+import { Form, Formik } from "formik";
+import React, { useImperativeHandle, useRef, useState } from "react";
 import {
   Button,
+  FormInput,
   FormInputWithLabel,
   Modal,
   ModalHandles
@@ -11,7 +22,8 @@ import { useCategorie } from "../../contexts/Categorie.context";
 import { CategorieFormData } from "../../utils";
 import { CategorieValidationSchema } from "../../validation";
 import { CategorieModel } from "../../../../models";
-import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
+import { showErrorToast } from "../../../../services/ToastService";
+import EmojiPicker from "emoji-picker-react";
 
 export type CategorieModalHandles = {
   open: (data?: CategorieModel) => void;
@@ -26,22 +38,19 @@ type IconButtonProps = {
   icon: string;
   onSelectIcon: (icon: string) => void;
   isSelected: boolean;
-}
+};
 
-
-function IconButton(props: IconButtonProps){
-
-  function handleButtonClick(){
-   
+function IconButton(props: IconButtonProps) {
+  function handleButtonClick() {
     props.onSelectIcon(props.icon);
   }
 
   return (
-    <ChakraUiButton 
-      alignItems={"center"} 
-      justifyContent={"center"} 
-      height={"4rem"} 
-      width={"4rem"} 
+    <ChakraUiButton
+      alignItems={"center"}
+      justifyContent={"center"}
+      height={"4rem"}
+      width={"4rem"}
       background={props.isSelected ? "primary.900" : "gray.300"}
       marginRight={"1rem"}
       onClick={handleButtonClick}
@@ -55,29 +64,15 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
   CategorieModalHandles,
   CategorieModalProps
 > = (props, ref) => {
+  const toast = useToast();
   const modalRef = useRef<ModalHandles | null>(null);
-  const { addCategorie, updateCategorie, removeCategorie} = useCategorie();
+  const { addCategorie, updateCategorie, removeCategorie } = useCategorie();
 
-  const [selectedCategorie, setSelectedCategorie] = useState<CategorieModel | null>(
-    null
-  );
+  const [selectedCategorie, setSelectedCategorie] =
+    useState<CategorieModel | null>(null);
   const [selectedIcon, setSelectedIcon] = useState("");
 
-  const formInitialValues = useMemo((): CategorieFormData => {
-    if (selectedCategorie) {
-      return {
-        id: selectedCategorie.id,
-        description: selectedCategorie.description,
-        icon: selectedCategorie.icon,
-      };
-    }
-
-    return {
-     id: " ",
-     description: " ",
-     icon: " ",
-    };
-  }, [selectedCategorie]);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   function openModal(data?: CategorieModel) {
     modalRef.current?.open();
@@ -95,20 +90,17 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
     };
   });
 
-  
-  function handleClickIconButton(icon: string){
+  function handleClickIconButton(icon: string) {
     setSelectedIcon(icon);
   }
-  const toast = useToast();
+
   async function handleSubmitForm(data: CategorieFormData) {
+    console.log("aqui");
 
-    
-     if(!selectedIcon){
-     showErrorToast(toast, "Selecione um ícone")
+    if (!selectedIcon) {
+      showErrorToast(toast, "Selecione um ícone");
       return;
-     }
-
-
+    }
     if (!selectedCategorie) {
       addCategorie({
         description: data.description,
@@ -133,73 +125,84 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
 
   return (
     <Modal
-      title={selectedCategorie? "Atualizar Categoria" : "Cadastrar Categoria"}
+      title={selectedCategorie ? "Atualizar Categoria" : "Cadastrar Categoria"}
       ref={modalRef}
-      
     >
-      <Formik<CategorieFormData> 
-        initialValues={formInitialValues}
+      <Formik<CategorieFormData>
+        initialValues={{ description: "", icon:" ", id: ""}}
+        validationSchema={CategorieValidationSchema}
         onSubmit={async (data, { setSubmitting }) => {
-          setSubmitting(true);
           await handleSubmitForm(data);
           setSubmitting(false);
         }}
-        validationSchema = {CategorieValidationSchema}
       >
         {({ isSubmitting, handleSubmit }) => {
           return (
-            <>
+            <Form>
               <Flex
-      alignItems={"center"} 
-      justifyContent ={"center"}
-      height={"6rem"} 
-      width="70%" 
-      background={"gray.300"}
-      borderRadius = {"20px"}
-      marginRight={"1rem"}
-      marginLeft = {"4rem"}>
-      
-        <Flex alignItems={"center"} 
-        justifyContent ={"center"}
-        background={"gray"} 
-        height={"4rem"}
-        width = "20%" 
-        borderRadius = {"20px"}
-        marginRight={"1rem"} >
-        <Text fontSize={"3rem"}>{selectedIcon}</Text></Flex>
-        <Box alignSelf={"flex-end"}>
-        <FormInputWithLabel
-                variant="WITHOUT_ICON"
-                formikFieldConfig={{ name: "description" }}
-                placeholder={"Nome da categoria"}
-                name="description"
-                marginBottom={"1rem"}
-                label=""
-               
-                
-              />
-              </Box>
-        </Flex>
-              
-              
-              <Flex paddingY={"40px"} marginLeft = {"7rem"}>
-                {defaultIcons.map(
-                  (icon) => (
-                    <IconButton isSelected={selectedIcon === icon} onSelectIcon={handleClickIconButton} key={icon} icon={icon} />)
-                  )
-                }
-                <Flex 
-              alignItems={"center"} 
-              justifyContent={"center"} 
-              height={"4rem"} 
-              width={"4rem"} 
-              borderRadius ={"5px"}
-              background={"gray.300"}
-              marginRight={"1rem"}></Flex>
+                alignItems={"center"}
+                justifyContent={"center"}
+                height={"6rem"}
+                width="70%"
+                background={"gray.300"}
+                borderRadius={"20px"}
+                marginRight={"1rem"}
+                marginLeft={"4rem"}
+              >
+                <Flex
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  background={"gray"}
+                  height={"4rem"}
+                  width="20%"
+                  borderRadius={"20px"}
+                  marginRight={"1rem"}
+                >
+                  <Text fontSize={"3rem"}>{selectedIcon}</Text>
+                </Flex>
+                <Box alignSelf={"flex-end"}>
+                  <FormInputWithLabel
+                    variant="WITHOUT_ICON"
+                    formikFieldConfig={{ name: "description" }}
+                    placeholder={"Nome da categoria"}
+                    name="description"
+                    marginBottom={"1rem"}
+                    label=""
+                  />
+                </Box>
               </Flex>
-              
+              <Flex paddingY={"40px"} marginLeft={"7rem"}>
+                {defaultIcons.map((icon) => (
+                  <IconButton
+                    isSelected={selectedIcon === icon}
+                    onSelectIcon={handleClickIconButton}
+                    key={icon}
+                    icon={icon}
+                  />
+                ))}
 
+                <ChakraUiButton
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  height={"4rem"}
+                  width={"4rem"}
+                  marginRight={"1rem"}
+                  onClick={() => setShowEmojiPicker(true)}
+                >
+                  <FaPlus color="green" />
 
+                  {showEmojiPicker && (
+                    <Box zIndex={3}>
+                      <EmojiPicker
+                        onEmojiClick={(emoji) => {
+                          setSelectedIcon(emoji.emoji);
+                          setShowEmojiPicker(false);
+                        }}
+                      />
+                    </Box>
+                  )}
+                </ChakraUiButton>
+              </Flex>
               <Flex
                 width={"100%"}
                 justifyContent={"flex-end"}
@@ -216,7 +219,7 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
                 ) : (
                   <>
                     <Button
-                      onClick={() => handleSubmit()}
+                      type="submit"
                       background={"primary.900"}
                       color={"white"}
                       width={"6rem"}
@@ -243,7 +246,7 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
                   </>
                 )}
               </Flex>
-            </>
+            </Form>
           );
         }}
       </Formik>
@@ -253,5 +256,3 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
 
 const CategorieModal = React.forwardRef(CategorieModalComponent);
 export { CategorieModal };
- 
-
