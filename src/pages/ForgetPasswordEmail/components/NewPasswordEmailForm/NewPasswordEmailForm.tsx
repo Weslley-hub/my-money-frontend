@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 import { NewPasswordEmailFormData } from "../types/NewPasswordEmailForm";
 import { initialNewPasswordEmailFormData } from "../utils/defaultNewPasswordEmailFormData";
-import { showSucessToast } from "../../../../services/ToastService";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 import { NewPasswordEmailValidationSchema } from "./validation/NewPasswordEmailValidationSchema";
 
 import { emailIcon } from "../../../../assets/images/icons";
 
 import { AuthFormLayout, Button, FormInput } from "../../../../components";
+import axios from "axios";
 
 const NewPasswordEmailForm = () => {
   const toast = useToast();
@@ -27,15 +28,34 @@ const NewPasswordEmailForm = () => {
     });
   }
 
-  function handleChangePassword(
+  async function handleChangePassword(
     formikHelpers: FormikHelpers<NewPasswordEmailFormData>
   ) {
-    const { setSubmitting } = formikHelpers;
+    console.log(formikHelpers);
+    type ApiErrorResponse = {
+      response: any;
+      data?:unknown
+    }
 
-    setTimeout(() => {
-      showSucessToast(toast, "Email enviado, verifique sua caixa de entrada");
-      setSubmitting(false);
-    }, 300);
+    const URL_API = "http://127.0.0.1:3333/api/v1";
+    const RESOURCE = "/auth/recovery-password/confirm-email";
+    const COMPLET_URL = `${URL_API}${RESOURCE}`;
+
+    try {
+      const response = await axios.post(COMPLET_URL);
+      console.log(response.data);
+      showSucessToast(toast,response.data.message);
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+
+    // const { setSubmitting } = formikHelpers;
+
+    // setTimeout(() => {
+    //   showSucessToast(toast, "Email enviado, verifique sua caixa de entrada");
+    //   setSubmitting(false);
+    // }, 300);
   }
 
   return (

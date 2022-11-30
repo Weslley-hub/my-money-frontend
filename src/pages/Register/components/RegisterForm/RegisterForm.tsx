@@ -23,6 +23,7 @@ import { showErrorToast, showSucessToast } from "../../../../services/ToastServi
 
 import { emailIcon, userIcon } from "../../../../assets/images/icons";
 import axios from "axios";
+import api from "../../../../services/Api";
 
 const RegisterForm = () => {
   const toast = useToast();
@@ -49,12 +50,7 @@ const RegisterForm = () => {
     formikHelpers: FormikHelpers<RegisterFormData>
   ) {
     const { setSubmitting } = formikHelpers;
-
-    const URL_API = "http://127.0.0.1:3333/api/v1";
-    const RESOURCE = "/auth/register";
-    const COMPLET_URL = `${URL_API}${RESOURCE}`;
     
-    console.log(COMPLET_URL);
     const requestData = {
       "name":data.name,
       "email":data.email,
@@ -64,10 +60,8 @@ const RegisterForm = () => {
 
     console.log(requestData);
     try {
-      const response = await axios.post(COMPLET_URL,requestData);
-      console.log(response.data);
+      const response = await api.post("/register",requestData);
       showSucessToast(toast,response.data.message);
-      navigateToLoginPage();
     } catch (error) {
       const apiError = error as ApiErrorResponse;
       showErrorToast(toast, apiError.response.data.message);
@@ -88,11 +82,11 @@ const RegisterForm = () => {
       pathname: "/auth/login",
     });
   }
-  return (
+  return(
     <AuthFormLayout
       formTitle="Criar Conta"
       hasGoBackButton
-      onClickGoBackButton={navigateToHomePage}
+      onClickGoBackButton={navigateToLoginPage}
     >
       <AvatarSelector
         onChangeSelectedAvatar={onChangeSelectedAvatar}
@@ -148,7 +142,7 @@ const RegisterForm = () => {
               <Button
                 py={"1.2rem"}
                 isLoading={isSubmitting}
-                onClick={navigateToHomePage}
+                onClick={navigateToLoginPage}
                 width={"80%"}
                 mt="2rem"
                 type="submit"
