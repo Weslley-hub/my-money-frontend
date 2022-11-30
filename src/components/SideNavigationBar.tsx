@@ -28,7 +28,7 @@ const SideNavigationBar  = () => {
 
   function MyCards() {
             navigate({
-            pathname: "/",
+            pathname: "/cards",
     });
   }
 
