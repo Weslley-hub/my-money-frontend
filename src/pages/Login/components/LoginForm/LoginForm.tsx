@@ -4,6 +4,7 @@ import {
   useToast,
   Button as ChackraUiButton,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +13,7 @@ import { emailIcon } from "../../../../assets/images/icons";
 import { AuthFormLayout, PasswordInput } from "../../../../components";
 import { Button } from "../../../../components/Button";
 import { FormInput } from "../../../../components/FormInput";
-import { showSucessToast } from "../../../../services/ToastService";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 import { LoginFormData } from "../../types";
 import { initialLoginFormData } from "../../utils";
@@ -25,11 +26,30 @@ export function LoginForm() {
   const toast = useToast();
 
   async function handleLogin(formData: LoginFormData) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve("");
-      }, 1000);
-    });
+
+    const URL_API = "http://127.0.0.1:3333/api/v1";
+    const RESOURCE = "/auth/login";
+    const COMPLET_URL = `${URL_API}${RESOURCE}`;
+    
+    const requestData = {
+      "email":formData.email,
+      "password":formData.password
+    }
+
+    console.log(requestData);
+    try {
+      const response = await axios.post(COMPLET_URL,requestData);
+      console.log(response.data);
+      showSucessToast(toast,response.data.message);
+    } catch (error) {
+      showErrorToast(toast, error.response.data.message);
+    }
+    
+    // await new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve("");
+    //   }, 1000);
+    // });
     showSucessToast(toast, "Login feito com sucesso");
   }
 
