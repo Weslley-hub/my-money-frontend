@@ -7,9 +7,11 @@ import {
   RegisterActionButtons
 } from "./components";
 import { ExpensesProvider } from "./contexts/Expenses.context";
+import { RevenuesProvider } from "./contexts/Revenue.context";
 
 const Home = () => {
   return (
+    <RevenuesProvider>
     <ExpensesProvider>
       <Box width={"100%"} height={"100vh"}>
         <Header />
@@ -37,6 +39,7 @@ const Home = () => {
         </Box>
       </Box>
     </ExpensesProvider>
+   </RevenuesProvider>
   );
 };
 
