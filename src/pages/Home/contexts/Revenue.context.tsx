@@ -49,7 +49,7 @@ export const RevenuesProvider = ({ children }: RevenuesProviderProps) => {
   function openRevenueModal(data?: RevenueModel) {
     revenuesModalRef.current?.open(data);
   }
-
+  
   return (
     <RevenuesContext.Provider
       value={{

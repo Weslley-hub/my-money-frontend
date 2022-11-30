@@ -22,13 +22,7 @@ export function AppRoutes() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/profile-settings" element={<ProfileSettings/>} />
       <Route path="/modal-revenue" element={<ModalRevenue/>} />
-     <Route path="/revenues" element={<Revenues data={{
-              id: "",
-              month: "",
-              year: 0,
-              usedAmount: 0,
-              totalAmount: 0
-          }} />} /> 
+     <Route path="/revenues" element={<Revenues />} /> 
     </Routes>
   );
 }

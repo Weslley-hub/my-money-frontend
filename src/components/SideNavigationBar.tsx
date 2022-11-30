@@ -16,13 +16,13 @@ const SideNavigationBar  = () => {
 
   function ProfileSettings() {
            navigate({
-           pathname: "/auth/profile-settings",
+           pathname: "/profile-settings",
     });
   }
 
   function MyCategories() {
             navigate({
-            pathname: "/auth/categories",
+            pathname: "/categories",
     });
   }
 
@@ -34,7 +34,7 @@ const SideNavigationBar  = () => {
 
   function MyRevenues() {
             navigate({
-            pathname: "/",
+            pathname: "/revenues",
     });
   }
 

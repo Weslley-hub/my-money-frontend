@@ -8,11 +8,12 @@ import { RevenueModel } from "../../../../models/Revenues";
 import { useRevenues } from "../../contexts/Revenue.context";
 
 
-import { cardOptions, expenseCategories, paymentMethods } from "../../mocks";
+import { categoriesOptions , expenseCategories, paymentMethods } from "../../mocks";
 
 
 import { RevenuesFormData } from "../../utils/RevenuesFormData";
 import { RevenuesValidationSchema } from "../../validation";
+
 
 
 export type RevenuesModalHandles = {
@@ -25,7 +26,7 @@ export type RevenuesModalProps = {};
 const RevenuesModalComponent: React.ForwardRefRenderFunction<
   RevenuesModalHandles,
   RevenuesModalProps
-> = (props, ref) => {
+> = (_props, ref) => {
   const modalRef = useRef<ModalHandles | null>(null);
   const { addRevenue, updateRevenue, removeRevenue } = useRevenues();
 
@@ -77,6 +78,7 @@ const RevenuesModalComponent: React.ForwardRefRenderFunction<
          usedAmount: data.usedAmount,
          totalAmount: data.totalAmount, 
       });
+
     } else {
       updateRevenue({
          month: data.month,
@@ -90,7 +92,7 @@ const RevenuesModalComponent: React.ForwardRefRenderFunction<
     closeModal();
   }
 
-  async function handleDeleteExpense() {
+  async function handleDeleteRevenue() {
     removeRevenue(selectedRevenue?.id!);
     closeModal();
   }
@@ -109,43 +111,47 @@ const RevenuesModalComponent: React.ForwardRefRenderFunction<
         }}
         validationSchema={RevenuesValidationSchema}
       >
-        {({ isSubmitting, handleSubmit, values }) => {
+        {({ isSubmitting, handleSubmit }) => {
           return (
             <>
-              <FormInputWithLabel
-                variant="WITHOUT_ICON"
-                formikFieldConfig={{ name: "description" }}
-                placeholder={"Descrição da Despesa"}
-                name="description"
-                marginBottom={"1rem"}
-                label="Descrição"
-              />
-
               <Flex
                 direction={"row"}
-                alignItems="flex-start"
-                justifyContent="space-between"
-                width={"100%"}
-                marginBottom={"1rem"}
+                  alignItems="flex-start"
+                  justifyContent="space-between"
+                  width={"100%"}
+                  marginBottom={"1rem"}
               >
-                <FormSelectWithLabel
-                  label="Categoria"
-                  width={"48%"}
-                  formikFieldConfig={{ name: "categoryId" }}
-                  placeholder="Categoria"
-                  name="categoryId"
-                  options={expenseCategories}
-                />
 
-                <FormSelectWithLabel
-                  label="Forma de Pagamento"
-                  width={"48%"}
-                  formikFieldConfig={{ name: "paymentMethodId" }}
-                  placeholder="Forma de pagamento"
-                  name="paymentMethod"
-                  options={paymentMethods}
-                />
+              <FormInputWithLabel
+                variant="WITHOUT_ICON"
+                formikFieldConfig={{ name: "month" }}
+                placeholder={"Mês"}
+                name="month"
+                marginBottom={"1rem"}
+                label="Mês"
+                width={"48%"}
+              />
+
+              <FormInputWithLabel
+                variant="WITHOUT_ICON"
+                formikFieldConfig={{ name: "year" }}
+                placeholder={"Ano"}
+                name="year"
+                marginBottom={"1rem"}
+                label="Ano"
+                width={"48%"}
+              />
+
               </Flex>
+
+              <FormInputWithLabel
+                variant="WITHOUT_ICON"
+                formikFieldConfig={{ name: "totalAmount" }}
+                placeholder={"Receita"}
+                name="totalAmount"
+                marginBottom={"1rem"}
+                label="Receita"
+              />
 
                 <Flex
                   direction={"row"}
@@ -153,36 +159,26 @@ const RevenuesModalComponent: React.ForwardRefRenderFunction<
                   justifyContent="space-between"
                   width={"100%"}
                   marginBottom={"1rem"}
-                >
-                  <FormSelectWithLabel
-                    label="Selecione o cartão"
-                    width={"48%"}
-                    formikFieldConfig={{ name: "cardId" }}
-                    placeholder="Cartão"
-                    name="cardId"
-                    options={cardOptions}
+                  >
+
+                    <FormSelectWithLabel
+                    label="Categoria"
+                    width={"75%"}
+                    formikFieldConfig={{ name: "categorieId" }}
+                    placeholder="Categoria"
+                    name="categorieId"
+                    options={categoriesOptions}
                   />
 
                   <FormInputWithLabel
+                    label="Porcentagem"
                     variant="WITHOUT_ICON"
-                    label="Número de parcelas"
-                    width={"48%"}
+                    placeholder="%"
+                    width={"24%"}
                     formikFieldConfig={{ name: "numberOfInstallments" }}
-                    placeholder="Número de parcelas"
                     name="numberOfInstallments"
                   />
                 </Flex>
-              )}
-
-              <FormInputWithLabel
-                variant="WITHOUT_ICON"
-                formikFieldConfig={{ name: "totalAmount" }}
-                placeholder={"Valor total da despesa"}
-                name="totalAmount"
-                marginBottom={"1rem"}
-                label="Valor Total da Despesa"
-                type="number"
-              />
 
               <Flex
                 width={"100%"}
@@ -210,10 +206,9 @@ const RevenuesModalComponent: React.ForwardRefRenderFunction<
                     >
                       Salvar
                     </Button>
-
-                    {selectedExpense && (
+                    {selectedRevenue && (
                       <Button
-                        onClick={handleDeleteExpense}
+                        onClick={handleDeleteRevenue}
                         background={"alert.900"}
                         color={"white"}
                         width={"6rem"}

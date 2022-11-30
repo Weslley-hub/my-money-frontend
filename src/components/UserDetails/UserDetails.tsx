@@ -19,7 +19,7 @@ const UserDetails = () => {
 
   function navigateToSettings() {
     navigate({
-            pathname: "/auth/profile-settings",
+            pathname: "/profile-settings",
     });
   }
 
