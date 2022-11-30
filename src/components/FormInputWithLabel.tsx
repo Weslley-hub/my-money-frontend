@@ -8,12 +8,13 @@ type OwnProps = {
 type FormInputWithLabelProps = FormInputProps & SpaceProps & OwnProps;
 
 const FormInputWithLabel = (props: FormInputWithLabelProps) => {
-  const { marginTop, marginBottom, label, width, ...rest } = props;
+  const { marginTop, marginLeft, marginBottom, label, width, ...rest } = props;
 
   return (
     <Flex
       direction={"column"}
       marginTop={marginTop}
+      marginLeft={marginLeft}
       marginBottom={marginBottom}
       width={width}
     >
