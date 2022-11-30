@@ -19,9 +19,11 @@ import { UserValidationSchema } from "../../validation/UserSchema";
 import { RegisterFormData } from "../../types/RegisterForm";
 
 import { initialRegisterFormData } from "../../utils/defaultRegisterFormData";
-import { showSucessToast } from "../../../../services/ToastService";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 import { emailIcon, userIcon } from "../../../../assets/images/icons";
+import axios from "axios";
+import api from "../../../../services/Api";
 
 const RegisterForm = () => {
   const toast = useToast();
@@ -39,23 +41,52 @@ const RegisterForm = () => {
     });
   }
 
-  function handleCreateAccount(
+  type ApiErrorResponse = {
+    response: any;
+    data?:unknown
+  }
+  async function handleCreateAccount(
     data: RegisterFormData,
     formikHelpers: FormikHelpers<RegisterFormData>
   ) {
     const { setSubmitting } = formikHelpers;
+    
+    const requestData = {
+      "name":data.name,
+      "email":data.email,
+      "password":data.password,
+      "avatar":selectedAvatar.id
+    }
 
-    setTimeout(() => {
-      showSucessToast(toast, "Usuário cadastrado com sucesso");
-      setSubmitting(false);
-    }, 300);
+    console.log(requestData);
+    try {
+      const response = await api.post("/register",requestData);
+      showSucessToast(toast,response.data.message);
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+    
+    
+    
+    
+    
+    // setTimeout(() => {
+    //   showSucessToast(toast, "Usuário cadastrado com sucesso");
+    //   setSubmitting(false);
+    // }, 300);
   }
 
-  return (
+  function navigateToLoginPage() {
+    navigate({
+      pathname: "/auth/login",
+    });
+  }
+  return(
     <AuthFormLayout
       formTitle="Criar Conta"
       hasGoBackButton
-      onClickGoBackButton={navigateToHomePage}
+      onClickGoBackButton={navigateToLoginPage}
     >
       <AvatarSelector
         onChangeSelectedAvatar={onChangeSelectedAvatar}
@@ -111,7 +142,7 @@ const RegisterForm = () => {
               <Button
                 py={"1.2rem"}
                 isLoading={isSubmitting}
-                onClick={navigateToHomePage}
+                onClick={navigateToLoginPage}
                 width={"80%"}
                 mt="2rem"
                 type="submit"
