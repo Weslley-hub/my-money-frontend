@@ -1,20 +1,20 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
 import { Card } from "../../../models/Card";
-import { CategorieModal, CategorieModalHandles } from "../components";
+import { CardModal, CardModalHandles } from "../components";
 
-export type CategorieContextData = {
-  categories: Card[];
-  addCategorie: (categorie: Card) => void;
-  updateCategorie: (updatedCategorie: Card) => void;
-  removeCategorie: (categorieId: string) => void;
-  openCategorieModal(data?: Card): void;
+export type CardContextData = {
+  cards: Card[];
+  addCard: (card: Card) => void;
+  updateCard: (updatedCard: Card) => void;
+  removeCard: (cardId: string) => void;
+  openCardModal(data?: Card): void;
 };
 
-const CategorieContext = createContext<CategorieContextData>(
-  {} as CategorieContextData
+const CardContext = createContext<CardContextData>(
+  {} as CardContextData
 );
 
-type CategorieProviderProps = {
+type CardProviderProps = {
   children: ReactNode;
 };
 
@@ -24,7 +24,7 @@ const initialState: Card[]= [
   name: "Automovel",
   flag:"🚘",
   number :"123",
-  type: "CREDIT_CARD"
+  type: "Crédito"
   
   },
   {
@@ -32,7 +32,7 @@ const initialState: Card[]= [
   name: "Alimentação",
   flag:"🍔",
   number :"456",
-  type: "DEBIT_CARD"
+  type: "Débito"
   
   },
   {
@@ -46,55 +46,55 @@ const initialState: Card[]= [
   
   
   ];
-export const CategorieProvider = ({ children }: CategorieProviderProps) => {
-  const categorieModalRef = useRef<CategorieModalHandles | null>(null);
+export const CardProvider = ({ children }: CardProviderProps) => {
+  const cardModalRef = useRef<CardModalHandles | null>(null);
 
-  const [categories, setCategories] = useState<Card[]>(initialState);
+  const [cards, setCards] = useState<Card[]>(initialState);
 
-  function addCategorie(categorie: Card) {
-    const newCategories = [
-      ...categories,
-      { ...categorie, id: new Date().toISOString() }
+  function addCard(card: Card) {
+    const newCard = [
+      ...cards,
+      { ...card, id: new Date().toISOString() }
     ];
-    setCategories(newCategories);
+    setCards(newCard);
   }
 
-  function updateCategorie(updatedCategorie: Card) {
-    const otherCategories = categories.filter(
-      (categorie) => categorie.id !== updatedCategorie.id
+  function updateCard(updatedCard: Card) {
+    const otherCards = cards.filter(
+      (card) => card.id !== updatedCard.id
     );
-    setCategories([...otherCategories, updatedCategorie]);
+    setCards([...otherCards, updatedCard]);
   }
 
-  function removeCategorie(categorieId: string) {
-    const remainingCategories = categories.filter(
-      (categorie) => categorie.id !== categorieId
+  function removeCard(cardId: string) {
+    const remainingCards = cards.filter(
+      (card) => card.id !== cardId
     );
-    setCategories(remainingCategories);
+    setCards(remainingCards);
   }
 
-  function openCategorieModal(data?: Card) {
-    categorieModalRef.current?.open(data);
+  function openCardModal(data?: Card) {
+    cardModalRef.current?.open(data);
   }
 
   return (
-    <CategorieContext.Provider
+    <CardContext.Provider
       value={{
-        categories,
-        addCategorie,
-        removeCategorie,
-        updateCategorie,
-        openCategorieModal
+        cards,
+        addCard,
+        removeCard,
+        updateCard,
+        openCardModal
       }}
     >
       {children}
 
-      <CategorieModal ref={categorieModalRef} />
-    </CategorieContext.Provider>
+      <CardModal ref={cardModalRef} />
+    </CardContext.Provider>
   );
 };
 
-export const useCategorie = (): CategorieContextData => {
-  const contextData = useContext(CategorieContext);
+export const useCard = (): CardContextData => {
+  const contextData = useContext(CardContext);
   return { ...contextData };
 };

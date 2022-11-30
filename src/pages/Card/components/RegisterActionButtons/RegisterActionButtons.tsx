@@ -2,15 +2,15 @@ import { Flex } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import { ButtonWithIcon } from "../../../../components/ButtonWithIcon";
 import { themePallete } from "../../../../global/styles/theme";
-import { useCategorie } from "../../contexts/Categorie.context";
+import { useCard } from "../../contexts/Categorie.context";
 
 type RegisterActionButtonsProps = {};
 
 const RegisterActionButtons = ({}: RegisterActionButtonsProps) => {
-  const { openCategorieModal } = useCategorie();
+  const { openCardModal } = useCard();
 
-  function openRegisterExpenseModal() {
-    openCategorieModal();
+  function openRegisterCardModal() {
+    openCardModal();
   }
 
   
@@ -27,7 +27,7 @@ const RegisterActionButtons = ({}: RegisterActionButtonsProps) => {
         label={"cartões"}
         marginRight={"1rem"}
         width={"10rem"}
-        onClick={openRegisterExpenseModal}
+        onClick={openRegisterCardModal}
       />
 
       
