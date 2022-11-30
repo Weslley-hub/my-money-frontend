@@ -19,9 +19,10 @@ import { UserValidationSchema } from "../../validation/UserSchema";
 import { RegisterFormData } from "../../types/RegisterForm";
 
 import { initialRegisterFormData } from "../../utils/defaultRegisterFormData";
-import { showSucessToast } from "../../../../services/ToastService";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 import { emailIcon, userIcon } from "../../../../assets/images/icons";
+import axios from "axios";
 
 const RegisterForm = () => {
   const toast = useToast();
@@ -39,18 +40,54 @@ const RegisterForm = () => {
     });
   }
 
-  function handleCreateAccount(
+  type ApiErrorResponse = {
+    response: any;
+    data?:unknown
+  }
+  async function handleCreateAccount(
     data: RegisterFormData,
     formikHelpers: FormikHelpers<RegisterFormData>
   ) {
     const { setSubmitting } = formikHelpers;
 
-    setTimeout(() => {
-      showSucessToast(toast, "Usuário cadastrado com sucesso");
-      setSubmitting(false);
-    }, 300);
+    const URL_API = "http://127.0.0.1:3333/api/v1";
+    const RESOURCE = "/auth/register";
+    const COMPLET_URL = `${URL_API}${RESOURCE}`;
+    
+    console.log(COMPLET_URL);
+    const requestData = {
+      "name":data.name,
+      "email":data.email,
+      "password":data.password,
+      "avatar":selectedAvatar.id
+    }
+
+    console.log(requestData);
+    try {
+      const response = await axios.post(COMPLET_URL,requestData);
+      console.log(response.data);
+      showSucessToast(toast,response.data.message);
+      navigateToLoginPage();
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+    
+    
+    
+    
+    
+    // setTimeout(() => {
+    //   showSucessToast(toast, "Usuário cadastrado com sucesso");
+    //   setSubmitting(false);
+    // }, 300);
   }
 
+  function navigateToLoginPage() {
+    navigate({
+      pathname: "/auth/login",
+    });
+  }
   return (
     <AuthFormLayout
       formTitle="Criar Conta"
