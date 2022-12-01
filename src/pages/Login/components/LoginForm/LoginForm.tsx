@@ -13,6 +13,7 @@ import { emailIcon } from "../../../../assets/images/icons";
 import { AuthFormLayout, PasswordInput } from "../../../../components";
 import { Button } from "../../../../components/Button";
 import { FormInput } from "../../../../components/FormInput";
+import api from "../../../../services/Api";
 import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 import { LoginFormData } from "../../types";
@@ -26,6 +27,8 @@ export function LoginForm() {
   const toast = useToast();
 
   async function handleLogin(formData: LoginFormData) {
+    console.log("teste");
+
     type ApiErrorResponse = {
       response: any;
       data?:unknown
@@ -39,9 +42,10 @@ export function LoginForm() {
       "email":formData.email,
       "password":formData.password
     }
+    console.log(requestData);
 
     try {
-      const response = await axios.post(COMPLET_URL, requestData);
+      const response = await api.post("/login", requestData);
       console.log(response.data);
       showSucessToast(toast,response.data.message);
     } catch (error) {
@@ -63,7 +67,8 @@ export function LoginForm() {
     });
   }
 
-  function navigateToLoginPage() {
+  function navigateToHomePage() {
+    console.log("teste");
     navigate({
       pathname: "/auth/register",
     });
@@ -80,10 +85,7 @@ export function LoginForm() {
       <Formik<LoginFormData>
         initialValues={initialLoginFormData}
         validationSchema={LoginValidationSchema}
-        onSubmit={async (formData, formikHelpers) => {
-          await handleLogin(formData);
-          formikHelpers.setSubmitting(false);
-        }}
+        onSubmit={async (formData)=>{console.log("APARECE DESGRAÇA"),await handleLogin(formData)}}
       >
         {({ isSubmitting }) => {
           return (
@@ -152,7 +154,7 @@ export function LoginForm() {
                   _hover={{
                     textDecoration: "none",
                   }}
-                  onClick={navigateToLoginPage}
+                  onClick={navigateToHomePage}
                 >
                   <Text>Criar conta</Text>
                 </ChackraUiButton>
