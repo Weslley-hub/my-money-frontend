@@ -34,10 +34,6 @@ export function LoginForm() {
       data?:unknown
     }
 
-    const URL_API = "http://127.0.0.1:3333/api/v1/auth";
-    const RESOURCE = "/login";
-    const COMPLET_URL = `${URL_API}${RESOURCE}`;
-    
     const requestData = {
       "email":formData.email,
       "password":formData.password
