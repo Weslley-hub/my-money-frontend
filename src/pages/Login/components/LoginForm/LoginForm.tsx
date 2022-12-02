@@ -79,9 +79,9 @@ export function LoginForm() {
   return (
     <AuthFormLayout formTitle="Login">
       <Formik<LoginFormData>
-        initialValues={initialLoginFormData}
         validationSchema={LoginValidationSchema}
-        onSubmit={async (formData)=>{console.log("APARECE DESGRAÇA"),await handleLogin(formData)}}
+        initialValues={initialLoginFormData}
+        onSubmit={handleLogin}
       >
         {({ isSubmitting }) => {
           return (
