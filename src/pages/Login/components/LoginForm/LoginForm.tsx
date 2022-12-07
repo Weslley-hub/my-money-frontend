@@ -13,7 +13,6 @@ import { emailIcon } from "../../../../assets/images/icons";
 import { AuthFormLayout, PasswordInput } from "../../../../components";
 import { Button } from "../../../../components/Button";
 import { FormInput } from "../../../../components/FormInput";
-import api from "../../../../services/Api";
 import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 import { LoginFormData } from "../../types";
@@ -27,21 +26,22 @@ export function LoginForm() {
   const toast = useToast();
 
   async function handleLogin(formData: LoginFormData) {
-    console.log("teste");
-
     type ApiErrorResponse = {
       response: any;
       data?:unknown
     }
 
+    const URL_API = "http://127.0.0.1:3333/api/v1/auth";
+    const RESOURCE = "/login";
+    const COMPLET_URL = `${URL_API}${RESOURCE}`;
+    
     const requestData = {
       "email":formData.email,
       "password":formData.password
     }
-    console.log(requestData);
 
     try {
-      const response = await api.post("/login", requestData);
+      const response = await axios.post(COMPLET_URL, requestData);
       console.log(response.data);
       showSucessToast(toast,response.data.message);
     } catch (error) {
@@ -54,6 +54,7 @@ export function LoginForm() {
     //   }, 1000);
     // });
     showSucessToast(toast, "Login feito com sucesso");
+    EnterPagHome();
   }
 
 
@@ -63,8 +64,7 @@ export function LoginForm() {
     });
   }
 
-  function navigateToHomePage() {
-    console.log("teste");
+  function navigateToLoginPage() {
     navigate({
       pathname: "/auth/register",
     });
@@ -79,9 +79,13 @@ export function LoginForm() {
   return (
     <AuthFormLayout formTitle="Login">
       <Formik<LoginFormData>
-        validationSchema={LoginValidationSchema}
         initialValues={initialLoginFormData}
-        onSubmit={handleLogin}
+        validationSchema={LoginValidationSchema}
+        onSubmit={async (formData, formikHelpers) => {
+          
+          await handleLogin(formData);
+          formikHelpers.setSubmitting(false);
+        }}
       >
         {({ isSubmitting }) => {
           return (
@@ -90,9 +94,7 @@ export function LoginForm() {
                 variant="WITH_ICON"
                 type="email"
                 mb={"1rem"}
-                placeholder="E-mail"
-                formikFieldConfig={{ name: "email" }}
-                iconSource={emailIcon}
+                placeholder="E-maiEnterPagHomecon}
                 name="email"
                 width={"80%"} />
 
@@ -133,7 +135,6 @@ export function LoginForm() {
                 width={"50%"}
                 mt="2rem"
                 type="submit"
-                onClick={EnterPagHome}
               >Entrar
               </Button>
 
@@ -150,7 +151,7 @@ export function LoginForm() {
                   _hover={{
                     textDecoration: "none",
                   }}
-                  onClick={navigateToHomePage}
+                  onClick={navigateToLoginPage}
                 >
                   <Text>Criar conta</Text>
                 </ChackraUiButton>
