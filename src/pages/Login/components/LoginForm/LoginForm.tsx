@@ -4,7 +4,7 @@ import {
   useToast,
   Button as ChackraUiButton,
 } from "@chakra-ui/react";
-import axios from "axios";
+
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +13,8 @@ import { emailIcon } from "../../../../assets/images/icons";
 import { AuthFormLayout, PasswordInput } from "../../../../components";
 import { Button } from "../../../../components/Button";
 import { FormInput } from "../../../../components/FormInput";
+import { ApiErrorResponse } from "../../../../global/types/apiErrorResponse";
+import api from "../../../../services/Api";
 import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 
 import { LoginFormData } from "../../types";
@@ -26,39 +28,26 @@ export function LoginForm() {
   const toast = useToast();
 
   async function handleLogin(formData: LoginFormData) {
-    type ApiErrorResponse = {
-      response: any;
-      data?:unknown
-    }
-
-    const URL_API = "http://127.0.0.1:3333/api/v1/auth";
-    const RESOURCE = "/login";
-    const COMPLET_URL = `${URL_API}${RESOURCE}`;
-    
     const requestData = {
       "email":formData.email,
       "password":formData.password
     }
 
     try {
-      const response = await axios.post(COMPLET_URL, requestData);
-      console.log(response.data);
-      showSucessToast(toast,response.data.message);
+      const response = await api.post("/auth/login", requestData);
+      console.log(response);
+      localStorage.setItem('token', response.data.token);
+      api.defaults.headers = response.data.token
+      showSucessToast(toast, "Login feito com sucesso");
+      enterPagHome();
     } catch (error) {
       const apiError = error as ApiErrorResponse;
       showErrorToast(toast, apiError.response.data.message);
     }
-    // await new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     resolve("");
-    //   }, 1000);
-    // });
-    showSucessToast(toast, "Login feito com sucesso");
-    EnterPagHome();
   }
 
 
-  function EnterPagHome() {
+  function enterPagHome() {
     navigate({
       pathname: "/",
     });
@@ -92,10 +81,12 @@ export function LoginForm() {
             <Form id="LoginForm">
               <FormInput
                 variant="WITH_ICON"
+                iconSource="Icon"
+                name="email"
                 type="email"
                 mb={"1rem"}
-                placeholder="E-maiEnterPagHomecon}
-                name="email"
+                placeholder="E-mail"
+                formikFieldConfig={{ name: "email" }}
                 width={"80%"} />
 
               <PasswordInput
