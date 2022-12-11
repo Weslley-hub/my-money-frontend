@@ -36,7 +36,7 @@ const UserDetails = () => {
           fontSize={"1.1rem"}
           color={"light.900"}
         >
-          Jorge Nobre
+          Alex Mota
         </Heading>
 
         <Flex marginTop={"0.5rem"}>
