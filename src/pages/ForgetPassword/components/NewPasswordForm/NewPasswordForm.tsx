@@ -29,16 +29,10 @@ const NewPasswordForm = () => {
   }
 
 
-  function handleChangePassword(
-    data: NewPasswordFormData,
-    formikHelpers: FormikHelpers<NewPasswordFormData>
+   async function handleChangePassword(
+    data: NewPasswordFormData
   ) {
-    const { setSubmitting } = formikHelpers;
-
-    setTimeout(() => {
-      showSucessToast(toast, "Senha alterada com sucesso");
-      setSubmitting(false);
-    }, 300);
+    
   }
 
   return (
@@ -50,7 +44,11 @@ const NewPasswordForm = () => {
       <Formik<NewPasswordFormData>
         initialValues={initialNewPasswordFormData}
         validationSchema={NewPasswordValidationSchema}
-        onSubmit={handleChangePassword}
+        onSubmit={async (formData, formikHelpers) => {
+          
+          await handleChangePassword(formData);
+          formikHelpers.setSubmitting(false);
+        }}
       >
         {({ isSubmitting }) => (
           <Form className="forget-password-step-form">
