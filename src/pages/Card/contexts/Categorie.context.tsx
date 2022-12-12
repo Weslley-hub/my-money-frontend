@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
-import { Card } from "../../../models/Card";
+import { Card, CardType } from "../../../models/Card";
 import { CardModal, CardModalHandles } from "../components";
 
 export type CardContextData = {
@@ -24,7 +24,7 @@ const initialState: Card[]= [
   name: "Automovel",
   flag:"🚘",
   number :"123",
-  type: "Crédito"
+  type: CardType.CREDIT
   
   },
   {
@@ -32,7 +32,7 @@ const initialState: Card[]= [
   name: "Alimentação",
   flag:"🍔",
   number :"456",
-  type: "Débito"
+  type: CardType.DEBIT
   
   },
   {
@@ -40,7 +40,7 @@ const initialState: Card[]= [
     name: "Pai",
     flag:"🧙‍♂️",
     number :"789",
-    type: "DEBIT_CREDIT_CARD"
+    type: CardType.DEBIT_CREDIT
     
     }
   

@@ -43,6 +43,7 @@ type IconButtonProps = {
 function IconButton(props: IconButtonProps) {
   function handleButtonClick() {
     props.onSelectIcon(props.icon);
+    // acho que a conexão com o banco é aqui
   }
 
   return (
@@ -102,11 +103,12 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
       return;
     }
     if (!selectedCategorie) {
-      addCategorie({
-        description: data.description,
-        icon: selectedIcon,
-        id: " "
-      });
+      // addCategorie({
+      //   description: data.description,
+      //   icon: selectedIcon,
+      //   id: " "
+      // });
+      // POST 
     } else {
       updateCategorie({
         description: data.description,

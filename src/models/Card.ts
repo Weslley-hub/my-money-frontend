@@ -1,8 +1,8 @@
 
  export enum CardType {
-  DEBIT = "Débito",
-  CREDIT = "Crédito",
-  DEBIT_CREDIT = "Débito/Crédito"
+  DEBIT = "DEBIT",
+  CREDIT = "CREDIT",
+  DEBIT_CREDIT = "CREDIT_DEBIT"
 }
 export type Card = {
   id: string;
