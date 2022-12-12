@@ -22,8 +22,10 @@ import { useCategorie } from "../../contexts/Categorie.context";
 import { CategorieFormData } from "../../utils";
 import { CategorieValidationSchema } from "../../validation";
 import { CategorieModel } from "../../../../models";
-import { showErrorToast } from "../../../../services/ToastService";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 import EmojiPicker from "emoji-picker-react";
+import api from "../../../../services/Api";
+import { ApiErrorResponse } from "../../../../global/types/apiErrorResponse";
 
 export type CategorieModalHandles = {
   open: (data?: CategorieModel) => void;
@@ -108,7 +110,26 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
       //   icon: selectedIcon,
       //   id: " "
       // });
-      // POST 
+      // POST expense-categories
+      const requestData = {
+        "name":data.description,
+        "icon":selectedIcon
+      }
+      try {
+
+        const token = localStorage.getItem("token");
+        const config = {
+          headers:{
+            authorization: token
+          }
+        };
+        const response = await api.post("expense-categories", requestData, config);
+        console.log(response);
+        showSucessToast(toast, "Registro feito com sucesso");
+      } catch (error) {
+        const apiError = error as ApiErrorResponse;
+        showErrorToast(toast, apiError.response.data.message);
+      }
     } else {
       updateCategorie({
         description: data.description,
