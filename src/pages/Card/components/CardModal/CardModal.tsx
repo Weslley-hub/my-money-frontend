@@ -14,7 +14,11 @@ import { FormSelectWithLabel } from "../../../../components/FormSelectWithLabel"
 import { CardOptions } from "../../mocks";
 import { FlagsOptions } from "../../mocks/FlagsOption";
 import { DataCard } from "../../../../models/DataCard";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
+import { ApiErrorResponse } from "../../../../global/types/apiErrorResponse";
+import api from "../../../../services/Api";
 
+// const toast = userToast();
 export type CardModalHandles = {
   open: (data?: Card) => void;
   close: () => void;
@@ -83,6 +87,29 @@ const CardModalComponent: React.ForwardRefRenderFunction<
       //   number: data.number,
       //   type: data.type,
       // });
+
+      const requestData = {
+        "number": data.number,
+        "name": data.name,
+        "type": data.type
+      }
+      console.log(requestData)
+      try {
+        //request.headers.authorization
+        const token = localStorage.getItem("token");
+        const config = {
+          headers:{
+            authorization: token
+          }
+        };
+        const response = await api.put("/users", requestData, config);
+        console.log(response);
+        // showSucessToast(toast, "Usuario atualizado com sucesso");
+      } catch (error) {
+        const apiError = error as ApiErrorResponse;
+        // showErrorToast(toast, apiError.response.data.message);
+      }
+      
       if(data.type == CardType.CREDIT || data.type == CardType.DEBIT_CREDIT){
         //POST CREDIT_CARD /api/v1/credit-cards
       }

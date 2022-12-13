@@ -131,18 +131,52 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
         showErrorToast(toast, apiError.response.data.message);
       }
     } else {
-      updateCategorie({
-        description: data.description,
-        icon: selectedIcon,
-        id: selectedCategorie.id
-      });
-    }
+      // updateCategorie({
+      //   description: data.description,
+      //   icon: selectedIcon,
+      //   id: selectedCategorie.id
+      // });
+      const requestData = {
+        "name":data.description,
+        "icon":selectedIcon,
+      }
+      try {
+        const token = localStorage.getItem("token")
+        const config = { 
+          headers: {
+            authorization: token
+          }
+        };
+        const response = await api.put(`/expense-categories/${selectedCategorie?.id}`, requestData,config);
+        console.log(response);
+        showSucessToast(toast, "Categoria atualizada com sucesso");
+      } catch (error) {
+        const apiError = error as ApiErrorResponse;
+        showErrorToast(toast, apiError.response.data.message);
+      }
 
     closeModal();
   }
+}
 
   async function handleDeleteExpense() {
-    removeCategorie(selectedCategorie?.id!);
+    //removeCategorie(selectedCategorie?.id!);
+    try {
+      //request.headers.authorization
+      const token = localStorage.getItem("token");
+      const config = {
+        headers:{
+          authorization: token
+        }
+      };
+      const response = await api.delete(`/expense-categories/${selectedCategorie?.id}`, config);
+      console.log(response);
+      showSucessToast(toast, "Categoria deletada com sucesso");
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+
     closeModal();
   }
 

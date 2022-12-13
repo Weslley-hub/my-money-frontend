@@ -10,23 +10,10 @@ type UpdateDeleteButtonGroupProps = {
 };
 
 const UpdateDeleteButtonGroup = ({
-  onClickDeleteExpenseButton,
   onClickUpdateExpenseButton
 }: UpdateDeleteButtonGroupProps) => {
   return (
     <Flex alignItems={"center"}>
-      <IconButton
-        className="revenue-action-btn delete-revenue-btn"
-        aria-label="Excluir Gasto"
-        variant={"ghost"}
-        minWidth={0}
-        minHeight={0}
-        height={"1rem"}
-        marginRight={"0.6rem"}
-        icon={<FaTrash size={"0.9rem"} />}
-        onClick={onClickDeleteExpenseButton}
-      />
-
       <IconButton
         aria-label="Editar Gasto"
         className="revenue-action-btn update-revenue-btn"

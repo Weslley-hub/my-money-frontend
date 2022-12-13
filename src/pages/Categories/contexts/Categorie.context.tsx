@@ -1,5 +1,8 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
+import { ApiErrorResponse } from "../../../global/types/apiErrorResponse";
 import { CategorieModel,  } from "../../../models";
+import api from "../../../services/Api";
+import { showErrorToast, showSucessToast } from "../../../services/ToastService";
 import { CategorieModal, CategorieModalHandles } from "../components";
 
 export type CategorieContextData = {
@@ -18,20 +21,43 @@ type CategorieProviderProps = {
   children: ReactNode;
 };
 
-const initialState: CategorieModel[]= [
-  { 
-    id: "1", description: "Automovel", icon:"🚘"
-  },
+async function handleDadosBanco() {
+  console.log("aqui");
+  try {
 
-  {
-   id: "2", description: "Alimentação", icon:"🍔"
-  },
-
-  {
-   id: "3", description: "Residência", icon:"🏠"
+    const token = localStorage.getItem("token");
+    const config = {
+      headers:{
+        authorization: token
+      }
+    };
+    const response = await api.get("expense-categories", config);
+    console.log(response);
+    return response;
+  } catch (error) {
+    const apiError = error as ApiErrorResponse;
+    return apiError;
   }
-  
+}
+
+var initialState: CategorieModel[]= [
+  { 
+    id: "1", name: "Automovel", icon:"🚘"
+  },
+
+  {
+   id: "2", name: "Alimentação", icon:"🍔"
+  },
+
+  {
+   id: "3", name: "Residência", icon:"🏠"
+  }
   ];
+
+// const CategoriasDoBanco = await handleDadosBanco();
+//console.log(CategoriasDoBanco?.data[5]);
+
+
 export const CategorieProvider = ({ children }: CategorieProviderProps) => {
   const categorieModalRef = useRef<CategorieModalHandles | null>(null);
 

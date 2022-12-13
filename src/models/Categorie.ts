@@ -1,6 +1,6 @@
 
 export type CategorieModel = {
   id: string;
-  description: string;
+  name: string;
   icon: string;
 };
