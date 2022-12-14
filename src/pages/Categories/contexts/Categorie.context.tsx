@@ -54,14 +54,14 @@ var initialState: CategorieModel[]= [
   }
   ];
 
-// const CategoriasDoBanco = await handleDadosBanco();
-//console.log(CategoriasDoBanco?.data[5]);
+const CategoriasDoBanco = await handleDadosBanco();
+console.log(CategoriasDoBanco?.data[5]);
 
 
 export const CategorieProvider = ({ children }: CategorieProviderProps) => {
   const categorieModalRef = useRef<CategorieModalHandles | null>(null);
 
-  const [categories, setCategories] = useState<CategorieModel[]>(initialState);
+  const [categories, setCategories] = useState<CategorieModel[]>(CategoriasDoBanco?.data);
 
   function addCategorie(categorie: CategorieModel) {
     const newCategories = [

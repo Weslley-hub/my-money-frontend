@@ -35,6 +35,30 @@ const ProfileSettingsConfig = () => {
     setSelectedAvatar(avatar);
   }, []);
 
+
+  function navigateToLoginPagesSettings() {
+    navigate({
+      pathname: "/auth/login",
+    });
+  }
+
+  async function handleDeleteUser(){
+    try {
+      //request.headers.authorization
+      const token = localStorage.getItem("token");
+      const config = {
+        headers:{
+          authorization: token
+        }
+      };
+      const response = await api.delete("/users",config);
+      showSucessToast(toast, "Usuario deletado com sucesso");
+      navigateToLoginPagesSettings();
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+  }
   async function handleAlterProfile(
     _data: ProfileSettingsData
   ) {
@@ -54,7 +78,7 @@ const ProfileSettingsConfig = () => {
           authorization: token
         }
       };
-      
+      console.log("token",token)
       const response = await api.put("/users", requestData, config);
       console.log(token);
       console.log(response);
@@ -140,6 +164,17 @@ const ProfileSettingsConfig = () => {
               alignItems="center"
               type="submit" >
                 Salvar
+              </Button>
+
+              <Button
+              onClick={handleDeleteUser}
+              py={"1.2rem"}
+              isLoading={isSubmitting}
+              background="red"
+              width={"45%"}
+              mt="2rem"
+              type="submit">
+                Delete Perfil
               </Button>
             </ButtonGroup>
             </Form>

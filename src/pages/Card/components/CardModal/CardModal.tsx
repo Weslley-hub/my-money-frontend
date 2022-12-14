@@ -18,6 +18,7 @@ import { showErrorToast, showSucessToast } from "../../../../services/ToastServi
 import { ApiErrorResponse } from "../../../../global/types/apiErrorResponse";
 import api from "../../../../services/Api";
 
+const toast = useToast();
 // const toast = userToast();
 export type CardModalHandles = {
   open: (data?: Card) => void;
@@ -73,8 +74,15 @@ const CardModalComponent: React.ForwardRefRenderFunction<
     };
   });
 
-  async function handleSubmitForm(data: DataCard) {
-
+  async function handleSubmitForm(cardDataForm: DataCard) {
+    const cardData = {
+      "name":cardDataForm.name,
+      "id":cardDataForm.id,
+      "number":cardDataForm.number,
+      "type":cardDataForm.type,
+      "limit":2000,
+      "invoiceDay": 19
+    }
 
 
     if (!selectedCard) {
@@ -86,44 +94,22 @@ const CardModalComponent: React.ForwardRefRenderFunction<
       //   id: " ",
       //   number: data.number,
       //   type: data.type,
-      // });
-
-      const requestData = {
-        "number": data.number,
-        "name": data.name,
-        "type": data.type
-      }
-      console.log(requestData)
-      try {
-        //request.headers.authorization
-        const token = localStorage.getItem("token");
-        const config = {
-          headers:{
-            authorization: token
-          }
-        };
-        const response = await api.put("/users", requestData, config);
-        console.log(response);
-        // showSucessToast(toast, "Usuario atualizado com sucesso");
-      } catch (error) {
-        const apiError = error as ApiErrorResponse;
-        // showErrorToast(toast, apiError.response.data.message);
-      }
       
-      if(data.type == CardType.CREDIT || data.type == CardType.DEBIT_CREDIT){
+      if(cardData.type == CardType.CREDIT || cardData.type == CardType.DEBIT_CREDIT){
+      
         //POST CREDIT_CARD /api/v1/credit-cards
       }
-      if(data.type == CardType.DEBIT){
+      if(cardData.type == CardType.DEBIT){
         //POST DEBIT_CARD /api/v1/debit-cards
       }
 
     } else {
       //UPDATE CREDIT_CARD /api/v1/credit-cards
       //UPDATE DEBIT_CARD /api/v1/debit-cards
-      if(data.type == CardType.CREDIT || data.type == CardType.DEBIT_CREDIT){
+      if(cardData.type == CardType.CREDIT || cardData.type == CardType.DEBIT_CREDIT){
         //PUT CREDIT_CARD /api/v1/credit-cards
       }
-      if(data.type == CardType.DEBIT){
+      if(cardData.type == CardType.DEBIT){
         //PUT DEBIT_CARD /api/v1/debit-cards
       }
       // updateCard({
