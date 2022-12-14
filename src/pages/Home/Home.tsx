@@ -9,6 +9,10 @@ import {
 import { ExpensesProvider } from "./contexts/Expenses.context";
 import { RevenuesProvider } from "./contexts/Revenue.context";
 
+ async function handleHome(){
+  const token = localStorage.getItem('token');
+}
+
 const Home = () => {
   return (
     <RevenuesProvider>

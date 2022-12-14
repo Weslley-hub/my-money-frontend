@@ -11,6 +11,7 @@ import { emailIcon } from "../../../../assets/images/icons";
 
 import { AuthFormLayout, Button, FormInput } from "../../../../components";
 import axios from "axios";
+import api from "../../../../services/Api";
 
 const NewPasswordEmailForm = () => {
   const toast = useToast();
@@ -29,22 +30,19 @@ const NewPasswordEmailForm = () => {
   }
 
   async function handleChangePassword(
-    formikHelpers: FormikHelpers<NewPasswordEmailFormData>
+    data: NewPasswordEmailFormData
   ) {
-    console.log(formikHelpers);
     type ApiErrorResponse = {
       response: any;
       data?:unknown
     }
 
-    const URL_API = "http://127.0.0.1:3333/api/v1";
-    const RESOURCE = "/auth/recovery-password/confirm-email";
-    const COMPLET_URL = `${URL_API}${RESOURCE}`;
-
     try {
-      const response = await axios.post(COMPLET_URL);
-      console.log(response.data);
-      showSucessToast(toast,response.data.message);
+      const response = await api.post("/auth/recovery-password/confirm-email",data.email);
+      localStorage.setItem('token', response.data.token);
+      api.defaults.headers = response.data.token
+      showSucessToast(toast, "Email");
+      EnterPagNewPassword();
     } catch (error) {
       const apiError = error as ApiErrorResponse;
       showErrorToast(toast, apiError.response.data.message);
@@ -67,7 +65,10 @@ const NewPasswordEmailForm = () => {
       <Formik<NewPasswordEmailFormData>
         initialValues={initialNewPasswordEmailFormData}
         validationSchema={NewPasswordEmailValidationSchema}
-        onSubmit={handleChangePassword}
+        onSubmit={async (formData, formikHelpers) => {
+          await handleChangePassword(formData);
+          formikHelpers.setSubmitting(false);
+        }}
       >
         {({ isSubmitting }) => (
           <Form className="forget-password-step-form">
@@ -88,7 +89,6 @@ const NewPasswordEmailForm = () => {
                 width={"50%"}
                 mt="2rem"
                 type="submit"
-                onClick={EnterPagNewPassword}
               >
               Enviar
               </Button>

@@ -22,8 +22,10 @@ import { useCategorie } from "../../contexts/Categorie.context";
 import { CategorieFormData } from "../../utils";
 import { CategorieValidationSchema } from "../../validation";
 import { CategorieModel } from "../../../../models";
-import { showErrorToast } from "../../../../services/ToastService";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
 import EmojiPicker from "emoji-picker-react";
+import api from "../../../../services/Api";
+import { ApiErrorResponse } from "../../../../global/types/apiErrorResponse";
 
 export type CategorieModalHandles = {
   open: (data?: CategorieModel) => void;
@@ -43,6 +45,7 @@ type IconButtonProps = {
 function IconButton(props: IconButtonProps) {
   function handleButtonClick() {
     props.onSelectIcon(props.icon);
+    // acho que a conexão com o banco é aqui
   }
 
   return (
@@ -94,6 +97,24 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
     setSelectedIcon(icon);
   }
 
+
+  async function handleDeleteUser() {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers:{
+          authorization: token
+        }
+      };
+      const response = await api.post("expense-categories", config);
+      console.log(response);
+      showSucessToast(toast, "Registro feito com sucesso");
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+  }
+
   async function handleSubmitForm(data: CategorieFormData) {
     console.log("aqui");
 
@@ -102,24 +123,78 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
       return;
     }
     if (!selectedCategorie) {
-      addCategorie({
-        description: data.description,
-        icon: selectedIcon,
-        id: " "
-      });
+      // addCategorie({
+      //   description: data.description,
+      //   icon: selectedIcon,
+      //   id: " "
+      // });
+      // POST expense-categories
+      const requestData = {
+        "name":data.description,
+        "icon":selectedIcon
+      }
+      try {
+
+        const token = localStorage.getItem("token");
+        const config = {
+          headers:{
+            authorization: token
+          }
+        };
+        const response = await api.post("expense-categories", requestData, config);
+        console.log(response);
+        showSucessToast(toast, "Registro feito com sucesso");
+      } catch (error) {
+        const apiError = error as ApiErrorResponse;
+        showErrorToast(toast, apiError.response.data.message);
+      }
     } else {
-      updateCategorie({
-        description: data.description,
-        icon: selectedIcon,
-        id: selectedCategorie.id
-      });
-    }
+      // updateCategorie({
+      //   description: data.description,
+      //   icon: selectedIcon,
+      //   id: selectedCategorie.id
+      // });
+      const requestData = {
+        "name":data.description,
+        "icon":selectedIcon,
+      }
+      try {
+        const token = localStorage.getItem("token")
+        const config = { 
+          headers: {
+            authorization: token
+          }
+        };
+        const response = await api.put(`/expense-categories/${selectedCategorie?.id}`, requestData,config);
+        console.log(response);
+        showSucessToast(toast, "Categoria atualizada com sucesso");
+      } catch (error) {
+        const apiError = error as ApiErrorResponse;
+        showErrorToast(toast, apiError.response.data.message);
+      }
 
     closeModal();
   }
+}
 
   async function handleDeleteExpense() {
-    removeCategorie(selectedCategorie?.id!);
+    //removeCategorie(selectedCategorie?.id!);
+    try {
+      //request.headers.authorization
+      const token = localStorage.getItem("token");
+      const config = {
+        headers:{
+          authorization: token
+        }
+      };
+      const response = await api.delete(`/expense-categories/${selectedCategorie?.id}`, config);
+      console.log(response);
+      showSucessToast(toast, "Categoria deletada com sucesso");
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+
     closeModal();
   }
 

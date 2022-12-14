@@ -55,7 +55,7 @@ const CategorieCard = ({ data: categorie }: CategorieCardProps) => {
 
             <Box marginLeft={"0.6rem"}>
               <Heading color={"strongText.900"} fontSize={"1.5rem"}>
-                {categorie.description}
+                {categorie.name}
               </Heading>
 
             

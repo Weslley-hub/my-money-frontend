@@ -9,11 +9,17 @@ import {
 } from "../../../../components";
 import { useCard } from "../../contexts/Categorie.context";
 import { CardValidationSchema } from "../../validation";
-import { Card } from "../../../../models/Card";
+import { Card, CardType } from "../../../../models/Card";
 import { FormSelectWithLabel } from "../../../../components/FormSelectWithLabel";
 import { CardOptions } from "../../mocks";
 import { FlagsOptions } from "../../mocks/FlagsOption";
+import { DataCard } from "../../../../models/DataCard";
+import { showErrorToast, showSucessToast } from "../../../../services/ToastService";
+import { ApiErrorResponse } from "../../../../global/types/apiErrorResponse";
+import api from "../../../../services/Api";
 
+const toast = useToast();
+// const toast = userToast();
 export type CardModalHandles = {
   open: (data?: Card) => void;
   close: () => void;
@@ -68,26 +74,51 @@ const CardModalComponent: React.ForwardRefRenderFunction<
     };
   });
 
-  async function handleSubmitForm(data: Card) {
-
+  async function handleSubmitForm(cardDataForm: DataCard) {
+    const cardData = {
+      "name":cardDataForm.name,
+      "id":cardDataForm.id,
+      "number":cardDataForm.number,
+      "type":cardDataForm.type,
+      "limit":2000,
+      "invoiceDay": 19
+    }
 
 
     if (!selectedCard) {
-      addCard({
-        name: data.name,
-        flag: data.flag,
-        id: " ",
-        number: data.number,
-        type: data.type,
-      });
+      //ADD CREDIT_CARD /api/v1/credit-cards
+      //ADD DEBIT_CARD /api/v1/debit-cards
+      // addCard({
+      //   name: data.name,
+      //   flag: data.flag,
+      //   id: " ",
+      //   number: data.number,
+      //   type: data.type,
+      
+      if(cardData.type == CardType.CREDIT || cardData.type == CardType.DEBIT_CREDIT){
+      
+        //POST CREDIT_CARD /api/v1/credit-cards
+      }
+      if(cardData.type == CardType.DEBIT){
+        //POST DEBIT_CARD /api/v1/debit-cards
+      }
+
     } else {
-      updateCard({
-        name: data.name,
-        flag: data.flag,
-        id: selectedCard.id,
-        number: data.number,
-        type: data.type,
-      });
+      //UPDATE CREDIT_CARD /api/v1/credit-cards
+      //UPDATE DEBIT_CARD /api/v1/debit-cards
+      if(cardData.type == CardType.CREDIT || cardData.type == CardType.DEBIT_CREDIT){
+        //PUT CREDIT_CARD /api/v1/credit-cards
+      }
+      if(cardData.type == CardType.DEBIT){
+        //PUT DEBIT_CARD /api/v1/debit-cards
+      }
+      // updateCard({
+      //   name: data.name,
+      //   flag: data.flag,
+      //   id: selectedCard.id,
+      //   number: data.number,
+      //   type: data.type,
+      // });
     }
 
     closeModal();
@@ -107,7 +138,6 @@ const CardModalComponent: React.ForwardRefRenderFunction<
       <Formik<Card> 
         initialValues={{name: "", number:"", type: "", flag:""}}
         onSubmit={async (data, { setSubmitting }) => {
-          setSubmitting(true);
           await handleSubmitForm(data);
           setSubmitting(false);
         }}
