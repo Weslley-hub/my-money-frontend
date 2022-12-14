@@ -12,6 +12,8 @@ const UserDetails = () => {
 
 
   function handleLogout() {
+
+    localStorage.removeItem("token");
     navigate({
             pathname: "/auth/login",
     });

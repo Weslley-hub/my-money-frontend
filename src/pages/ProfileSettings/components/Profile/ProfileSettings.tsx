@@ -54,7 +54,9 @@ const ProfileSettingsConfig = () => {
           authorization: token
         }
       };
+      
       const response = await api.put("/users", requestData, config);
+      console.log(token);
       console.log(response);
       showSucessToast(toast, "Usuario atualizado com sucesso");
     } catch (error) {

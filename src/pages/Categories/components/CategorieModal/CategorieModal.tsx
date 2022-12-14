@@ -97,6 +97,24 @@ const CategorieModalComponent: React.ForwardRefRenderFunction<
     setSelectedIcon(icon);
   }
 
+
+  async function handleDeleteUser() {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers:{
+          authorization: token
+        }
+      };
+      const response = await api.post("expense-categories", config);
+      console.log(response);
+      showSucessToast(toast, "Registro feito com sucesso");
+    } catch (error) {
+      const apiError = error as ApiErrorResponse;
+      showErrorToast(toast, apiError.response.data.message);
+    }
+  }
+
   async function handleSubmitForm(data: CategorieFormData) {
     console.log("aqui");
 
